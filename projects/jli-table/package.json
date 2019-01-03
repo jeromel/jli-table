@@ -1,0 +1,20 @@
+{
+  "name": "jli-table",
+  "version": "0.1.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jeromel/jli-table.git"
+  },
+  "peerDependencies": {
+    "@angular/common": "^7.1.0",
+    "@angular/core": "^7.1.0",
+    "primeng": "^7.0.3",
+    "primeicons": "^1.0.0",
+    "@ng-bootstrap/ng-bootstrap" : "^4.0.1",
+    "font-awesome": "^4.7.0"
+  },
+  "publishConfig": {
+    "registry": "http://localhost:8081/repository/npm-private/"
+  }
+}
