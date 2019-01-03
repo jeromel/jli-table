@@ -67,7 +67,7 @@ export class TDataService {
                 let d1: Date = v1;
                 let d2: Date = v2;
 
-                result = +new Date(d2) - +new Date(d1);
+                result = +new Date(d1) - +new Date(d2);
             }
 
             return event.order * result;

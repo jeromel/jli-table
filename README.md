@@ -6,7 +6,7 @@ This is a wrapper of primeng library to simplify TurboTable use.
 
 There library is in "projects/jli-table" folder.
 
-/!\ The library is publish by default to a local registry. If necessary, change the information in "projects/jli-table/src/package.json" at :
+/!\ The library is published by default to a local registry. If necessary, change the information in "projects/jli-table/src/package.json" at :
 
 ```
 "publishConfig": {
