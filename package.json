@@ -2,6 +2,7 @@
   "name": "test-jli-table",
   "version": "0.1.0",
   "license": "MIT",
+  "readme": "https://github.com/jeromel/jli-table/blob/develop/README.md",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
