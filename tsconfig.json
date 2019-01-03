@@ -17,6 +17,18 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "jli-table": [
+        "dist/jli-table",
+        "dist/jli-table",
+        "dist/jli-table"
+      ],
+      "jli-table/*": [
+        "dist/jli-table/*",
+        "dist/jli-table/*",
+        "dist/jli-table/*"
+      ]
+    }
   }
 }
