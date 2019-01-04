@@ -1,6 +1,6 @@
 {
   "name": "test-jli-table",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "license": "MIT",
   "readme": "https://github.com/jeromel/jli-table/blob/develop/README.md",
   "scripts": {
@@ -29,10 +29,13 @@
     "@angular/platform-browser": "~7.1.0",
     "@angular/platform-browser-dynamic": "~7.1.0",
     "@angular/router": "~7.1.0",
+    "@fortawesome/angular-fontawesome": "^0.3.0",
+    "@fortawesome/fontawesome-svg-core": "^1.2.12",
+    "@fortawesome/free-solid-svg-icons": "^5.6.3",
     "@ng-bootstrap/ng-bootstrap": "^4.0.1",
     "core-js": "^2.5.4",
     "font-awesome": "^4.7.0",
-    "jli-table": "^0.3.0",
+    "jli-table": "^0.4.0",
     "primeicons": "^1.0.0",
     "primeng": "^7.0.3",
     "rxjs": "~6.3.3",
