@@ -8,6 +8,7 @@ import { AppComponent } from 'src/app/app.component';
 
 import { HttpClientModule } from '@angular/common/http';
 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { JliTableModule } from 'jli-table';
 import { CarService } from 'src/services/car.service';
@@ -22,6 +23,7 @@ import { TableModule } from 'primeng/table';
     BrowserAnimationsModule,
     NgbModule,
     HttpClientModule,
+    FontAwesomeModule,
     JliTableModule,
     TableModule
   ],

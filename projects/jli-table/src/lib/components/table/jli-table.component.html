@@ -23,7 +23,14 @@
                 </a>
             </td>
             <td *ngFor="let col of columns">
-                    {{rowData.Data[col.FieldName]}}
+                    <div *ngIf="col.Inputs.length == 0; else elseInputsColumnBlock">
+                        {{rowData.Data[col.FieldName]}}
+                    </div>
+                    <ng-template #elseInputsColumnBlock>
+                        <div *ngFor="let in of col.Inputs">
+                                <ng-container *ngTemplateOutlet="in; context:rowData">></ng-container>
+                        </div>
+                    </ng-template>
             </td>
         </tr>
     </ng-template>
