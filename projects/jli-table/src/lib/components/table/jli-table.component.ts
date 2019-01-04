@@ -2,8 +2,8 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { TData } from '../../entities/TData';
 import { TColumn } from '../../entities/TColumn';
 
-import { SortEvent } from 'node_modules/primeng/components/common/sortevent';
-import { Table } from 'node_modules/primeng/table';
+import { SortEvent } from 'primeng/components/common/sortevent';
+import { Table } from 'primeng/table';
 
 @Component({
   selector: 'lib-jli-table',
