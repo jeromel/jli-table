@@ -10,5 +10,5 @@ export abstract class TColumn {
 
     abstract customSort(event: ISortEvent);
 
-    Inputs: Array<TemplateRef<any>> = [];
+    Inputs: TemplateRef<any> = null;
 }

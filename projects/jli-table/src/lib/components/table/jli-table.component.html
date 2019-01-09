@@ -23,13 +23,11 @@
                 </a>
             </td>
             <td *ngFor="let col of columns" [hidden]="!col.IsVisible">
-                    <div *ngIf="col.Inputs.length == 0; else elseInputsColumnBlock">
+                    <div *ngIf="col.Inputs == null; else elseInputsColumnBlock">
                         {{rowData.Data[col.FieldName]}}
                     </div>
                     <ng-template #elseInputsColumnBlock>
-                        <div *ngFor="let in of col.Inputs">
-                                <ng-container *ngTemplateOutlet="in; context:rowData">></ng-container>
-                        </div>
+                        <ng-container *ngTemplateOutlet="col.Inputs; context:rowData">></ng-container>
                     </ng-template>
             </td>
         </tr>
