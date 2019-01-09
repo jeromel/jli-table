@@ -34,11 +34,12 @@ export class AppComponent {
   constructor(private carService: CarService) {}
 
   ngOnInit() {
+    this.isVin = false;
     this.carTableColumns = [
      { FieldName:'id', HeaderName:'Id', IsVisible: true, IsSortable: true, IsFilterable: false, customSort: (event => TDataService.SimpleSort(event)), Inputs: []},
       { FieldName:'action', HeaderName:'Action', IsVisible: true, IsSortable: false, IsFilterable: false, customSort: (event => {}), Inputs: [this.greetTpl]},
       { FieldName:'date', HeaderName:'Date', IsVisible: true, IsSortable: true, IsFilterable: false, customSort: (event => TDataService.DateSort(event)), Inputs: []},
-      { FieldName:'vin', HeaderName:'Vin', IsVisible: true, IsSortable: true, IsFilterable: true, customSort: (event => TDataService.SimpleSort(event)), Inputs: []},
+      { FieldName:'vin', HeaderName:'Vin', IsVisible: this.isVin, IsSortable: true, IsFilterable: true, customSort: (event => TDataService.SimpleSort(event)), Inputs: []},
       { FieldName:'year', HeaderName:'Year', IsVisible: true, IsSortable: true, IsFilterable: true, customSort: (event => TDataService.SimpleSort(event)), Inputs: []},
       { FieldName:'brand', HeaderName:'Brand', IsVisible: true, IsSortable: true, IsFilterable: false, customSort: (event => TDataService.SimpleSort(event)), Inputs: []},
       { FieldName:'color', HeaderName:'Color', IsVisible: true, IsSortable: true, IsFilterable: false, customSort: (event => TDataService.SimpleSort(event)), Inputs: []},
@@ -52,6 +53,12 @@ export class AppComponent {
     }
   }
   
+  public isVin: boolean;
+  public ShowVin() {
+    this.isVin = !this.isVin;
+    this.data.Columns.find(x => x.FieldName == 'vin').IsVisible = this.isVin;
+  }
+
   public OnClick(): void {
     this.carService.getCarsSmall().then(result => {
       TDataService.FormatData(result, this.data, x => {
