@@ -1,6 +1,6 @@
 {
   "name": "jli-table",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -13,8 +13,5 @@
     "primeicons": "^1.0.0",
     "@ng-bootstrap/ng-bootstrap" : "^4.0.1",
     "font-awesome": "^4.7.0"
-  },
-  "publishConfig": {
-    "registry": "http://localhost:8081/repository/npm-private/"
   }
 }
