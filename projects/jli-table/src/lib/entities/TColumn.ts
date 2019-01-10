@@ -15,5 +15,7 @@ export abstract class TColumn {
 
     public Inputs: TemplateRef<any> = null;
 
+    public ClassData: string;
+    
     public Format: PipeTransform;
 }

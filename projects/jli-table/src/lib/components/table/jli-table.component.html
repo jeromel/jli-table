@@ -4,6 +4,8 @@
     [paginator]="true" [rows]="rowsPerPageDefault" [rowsPerPageOptions]="[5,10,15]" [paginatorPosition]="'both'"
     [customSort]="true"
     (sortFunction)="customSort($event)"
+    (onSort)="onSort($event)"
+    (onFilter)="onFilter($event)"
     (onPage)="onPage($event)"
     #table>
     <ng-template pTemplate="header" let-columns>
@@ -23,7 +25,7 @@
                     <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></i>
                 </a>
             </td>
-            <td *ngFor="let col of columns" [hidden]="!col.IsVisible">
+            <td *ngFor="let col of columns" [hidden]="!col.IsVisible" [ngClass]="col.ClassData == null ? '' : col.ClassData">
                 <div *ngIf="col.Inputs == null; else elseInputsColumnBlock">
                     <ng-container *ngIf="col.Format == null; else elseFormatNull">
                         {{ rowData.Data[col.FieldName] }}
@@ -51,7 +53,7 @@
     <ng-template pTemplate="footer" let-columns>
         <tr>
             <td style="width: 3em"></td>
-            <td *ngFor="let col of columns" [hidden]="!col.IsVisible">
+            <td *ngFor="let col of columns" [hidden]="!col.IsVisible" [ngClass]="col.ClassData == null ? '' : col.ClassData">
                <ng-container [ngSwitch]="col.FooterType">
                    <span *ngSwitchCase="FooterType.None">&nbsp;</span>
                    <span *ngSwitchCase="FooterType.RepeatHeader">{{ col.HeaderName }}</span>
@@ -59,7 +61,7 @@
                        {{ SumAll(col.FieldName) }}
                    </span>
                    <span *ngSwitchCase="FooterType.SumPage">
-                        {{ SumPage(col.FieldName) }}
+                        {{ footerValues[col.FieldName] }}
                     </span>
                </ng-container>
             </td>
