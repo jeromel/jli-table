@@ -17,6 +17,7 @@ export class TDataService {
 
         td.Rows = formattedData;
         fill(td);
+        td.OnChangeSub.next(td);
     }
 
     public static SimpleSort(event: ISortEvent): void {
