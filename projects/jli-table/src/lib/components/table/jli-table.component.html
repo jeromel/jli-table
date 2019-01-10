@@ -1,9 +1,10 @@
 <p-table [columns]="TData.Columns" [value]="TData.Rows"
     [rowExpandMode]="'single'"
     [expandedRowKeys]="TData.ExpandedRows"
-    [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5,10,15]" [paginatorPosition]="'both'"
+    [paginator]="true" [rows]="rowsPerPageDefault" [rowsPerPageOptions]="[5,10,15]" [paginatorPosition]="'both'"
     [customSort]="true"
     (sortFunction)="customSort($event)"
+    (onPage)="onPage($event)"
     #table>
     <ng-template pTemplate="header" let-columns>
         <tr>
@@ -23,23 +24,45 @@
                 </a>
             </td>
             <td *ngFor="let col of columns" [hidden]="!col.IsVisible">
-                    <div *ngIf="col.Inputs == null; else elseInputsColumnBlock">
-                        {{rowData.Data[col.FieldName]}}
-                    </div>
-                    <ng-template #elseInputsColumnBlock>
-                        <ng-container *ngTemplateOutlet="col.Inputs; context:rowData">></ng-container>
+                <div *ngIf="col.Inputs == null; else elseInputsColumnBlock">
+                    <ng-container *ngIf="col.Format == null; else elseFormatNull">
+                        {{ rowData.Data[col.FieldName] }}
+                    </ng-container>
+                    <ng-template #elseFormatNull>
+                        {{ col.Format.transform(rowData.Data[col.FieldName]) }}
                     </ng-template>
+                </div>
+                <ng-template #elseInputsColumnBlock>
+                    <ng-container *ngTemplateOutlet="col.Inputs; context:rowData">></ng-container>
+                </ng-template>
             </td>
         </tr>
     </ng-template>
     <ng-template pTemplate="rowexpansion" let-rowData let-columns="columns">
-            <tr *ngFor="let expRow of rowData.ExpandableContent | keyvalue">
-                <td>
-                    &nbsp;
-                </td>
-                <td *ngFor="let col of columns" [hidden]="!col.IsVisible">
-                        {{expRow.value.Data[col.FieldName]}}
-                </td>
-            </tr>
-        </ng-template>
+        <tr *ngFor="let expRow of rowData.ExpandableContent | keyvalue">
+            <td>
+                &nbsp;
+            </td>
+            <td *ngFor="let col of columns" [hidden]="!col.IsVisible">
+                    {{expRow.value.Data[col.FieldName]}}
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="footer" let-columns>
+        <tr>
+            <td style="width: 3em"></td>
+            <td *ngFor="let col of columns" [hidden]="!col.IsVisible">
+               <ng-container [ngSwitch]="col.FooterType">
+                   <span *ngSwitchCase="FooterType.None">&nbsp;</span>
+                   <span *ngSwitchCase="FooterType.RepeatHeader">{{ col.HeaderName }}</span>
+                   <span *ngSwitchCase="FooterType.SumAll">
+                       {{ SumAll(col.FieldName) }}
+                   </span>
+                   <span *ngSwitchCase="FooterType.SumPage">
+                        {{ SumPage(col.FieldName) }}
+                    </span>
+               </ng-container>
+            </td>
+        </tr>
+    </ng-template>
 </p-table>

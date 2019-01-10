@@ -7,6 +7,8 @@ import { TRow } from 'projects/jli-table/src/lib/entities/TRow';
 import { CarService } from 'src/services/car.service';
 
 import {faEdit, faLock, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+import { FooterType } from 'projects/jli-table/src/lib/entities/FooterType';
+import { FrenchDecimalPipe } from 'src/pipes/french-decimal.pipe';
 
 @Component({
   selector: 'app-root',
@@ -36,13 +38,13 @@ export class AppComponent {
   ngOnInit() {
     this.isVin = false;
     this.carTableColumns = [
-     { FieldName:'id', HeaderName:'Id', IsVisible: true, IsSortable: true, IsFilterable: false, customSort: (event => TDataService.SimpleSort(event)), Inputs: null},
-      { FieldName:'action', HeaderName:'Action', IsVisible: true, IsSortable: false, IsFilterable: false, customSort: (event => {}), Inputs: this.greetTpl},
-      { FieldName:'date', HeaderName:'Date', IsVisible: true, IsSortable: true, IsFilterable: false, customSort: (event => TDataService.DateSort(event)), Inputs: null},
-      { FieldName:'vin', HeaderName:'Vin', IsVisible: this.isVin, IsSortable: true, IsFilterable: true, customSort: (event => TDataService.SimpleSort(event)), Inputs: null},
-      { FieldName:'year', HeaderName:'Year', IsVisible: true, IsSortable: true, IsFilterable: true, customSort: (event => TDataService.SimpleSort(event)), Inputs: null},
-      { FieldName:'brand', HeaderName:'Brand', IsVisible: true, IsSortable: true, IsFilterable: false, customSort: (event => TDataService.SimpleSort(event)), Inputs: null},
-      { FieldName:'color', HeaderName:'Color', IsVisible: true, IsSortable: true, IsFilterable: false, customSort: (event => TDataService.SimpleSort(event)), Inputs: null},
+      { FieldName:'id', HeaderName:'Id', IsVisible: true, IsSortable: true, IsFilterable: false, customSort: (event => TDataService.SimpleSort(event)), Inputs: null, FooterType: FooterType.SumPage, Format: null },
+      { FieldName:'action', HeaderName:'Action', IsVisible: true, IsSortable: false, IsFilterable: false, customSort: (event => {}), Inputs: this.greetTpl, FooterType: FooterType.RepeatHeader, Format: null },
+      { FieldName:'date', HeaderName:'Date', IsVisible: true, IsSortable: true, IsFilterable: false, customSort: (event => TDataService.DateSort(event)), Inputs: null, FooterType: FooterType.None, Format: null },
+      { FieldName:'vin', HeaderName:'Vin', IsVisible: this.isVin, IsSortable: true, IsFilterable: true, customSort: (event => TDataService.SimpleSort(event)), Inputs: null, FooterType: FooterType.None, Format: null },
+      { FieldName:'year', HeaderName:'Year', IsVisible: true, IsSortable: true, IsFilterable: true, customSort: (event => TDataService.SimpleSort(event)), Inputs: null, FooterType: FooterType.SumPage, Format: new FrenchDecimalPipe },
+      { FieldName:'brand', HeaderName:'Brand', IsVisible: true, IsSortable: true, IsFilterable: false, customSort: (event => TDataService.SimpleSort(event)), Inputs: null, FooterType: FooterType.None, Format: null },
+      { FieldName:'color', HeaderName:'Color', IsVisible: true, IsSortable: true, IsFilterable: false, customSort: (event => TDataService.SimpleSort(event)), Inputs: null, FooterType: FooterType.None, Format: null },
   ];
     this.data = new TData();
     this.data.DataKey = this.carTableColumns[0].FieldName;

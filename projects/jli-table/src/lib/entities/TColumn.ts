@@ -1,5 +1,6 @@
 import { ISortEvent } from './ISortEvent';
-import { TemplateRef } from '@angular/core';
+import { TemplateRef, PipeTransform } from '@angular/core';
+import { FooterType } from './FooterType';
 
 export abstract class TColumn {
     FieldName: string = '';
@@ -7,8 +8,12 @@ export abstract class TColumn {
     IsVisible: boolean = true;
     IsSortable: boolean = true;
     IsFilterable: boolean = false;
+    
+    public FooterType: FooterType = FooterType.None;
 
-    abstract customSort(event: ISortEvent);
+    public abstract customSort(event: ISortEvent);
 
-    Inputs: TemplateRef<any> = null;
+    public Inputs: TemplateRef<any> = null;
+
+    public Format: PipeTransform;
 }
