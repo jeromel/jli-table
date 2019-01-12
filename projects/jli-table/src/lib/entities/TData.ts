@@ -17,6 +17,8 @@ export class TData {
         return this.OnChangeSub.asObservable();
     }
 
+    RowsPerPageOptions: Array<number>;
+    
     constructor() {
         this.OnChangeSub = new Subject<TData>();
     }

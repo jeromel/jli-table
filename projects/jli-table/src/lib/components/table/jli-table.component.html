@@ -1,7 +1,7 @@
 <p-table [columns]="TData.VisibleColumns" [value]="TData.Rows"
     [rowExpandMode]="'single'"
     [expandedRowKeys]="TData.ExpandedRows"
-    [paginator]="true" [rows]="rowsPerPageDefault" [rowsPerPageOptions]="[5,10,15]" [paginatorPosition]="'both'"
+    [paginator]="true" [rows]="rowsPerPageDefault" [rowsPerPageOptions]="TData.RowsPerPageOptions" [paginatorPosition]="'both'"
     [customSort]="true"
     (sortFunction)="customSort($event)"
     (onSort)="onSort($event)"

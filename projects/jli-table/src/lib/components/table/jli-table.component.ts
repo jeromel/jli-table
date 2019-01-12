@@ -120,7 +120,6 @@ export class JliTableComponent implements OnInit {
   public lastRow: number;
 
   public onPage(event) {
-    console.debug(event);
     this.firstRow = event.first;
     this.lastRow = event.first + event.rows;
 

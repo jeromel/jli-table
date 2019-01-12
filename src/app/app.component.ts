@@ -54,6 +54,7 @@ export class AppComponent {
     for(let col of this.data.Columns) {
       this.data.ExpandedRows[col.FieldName] = 0;
     }
+    this.data.RowsPerPageOptions = [5, 10, 100];
   }
   
   public isVin: boolean;
