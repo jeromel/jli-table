@@ -1,7 +1,7 @@
-<p-table [columns]="TData.Columns" [value]="TData.Rows"
+<p-table [columns]="TData.VisibleColumns" [value]="TData.Rows"
     [rowExpandMode]="'single'"
     [expandedRowKeys]="TData.ExpandedRows"
-    [paginator]="true" [rows]="rowsPerPageDefault" [rowsPerPageOptions]="[5,10,15]" [paginatorPosition]="'both'"
+    [paginator]="true" [rows]="rowsPerPageDefault" [rowsPerPageOptions]="TData.RowsPerPageOptions" [paginatorPosition]="'both'"
     [customSort]="true"
     (sortFunction)="customSort($event)"
     (onSort)="onSort($event)"
@@ -11,7 +11,7 @@
     <ng-template pTemplate="header" let-columns>
         <tr>
             <th style="width: 3em"></th>
-            <th *ngFor="let col of columns" [hidden]="!col.IsVisible" [pSortableColumn]="col.FieldName">
+            <th *ngFor="let col of columns" [pSortableColumn]="col.FieldName">
                 <div>{{col.HeaderName}}</div>
                 <p-sortIcon *ngIf="col.IsSortable" [field]="col.FieldName" ariaLabel="Tri les données" ariaLabelDesc="Tri dans l'ordre décroissant" ariaLabelAsc="Tri dans l'ordre croissant"></p-sortIcon>
                 <input *ngIf="col.IsFilterable" pInputText type="text" (input)="customFilter($event.target.value, col.FieldName)" (click)="$event.stopPropagation()"/>
@@ -25,7 +25,7 @@
                     <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></i>
                 </a>
             </td>
-            <td *ngFor="let col of columns" [hidden]="!col.IsVisible" [ngClass]="col.ClassData == null ? '' : col.ClassData">
+            <td *ngFor="let col of columns" [ngClass]="col.ClassData == null ? '' : col.ClassData">
                 <div *ngIf="col.Inputs == null; else elseInputsColumnBlock">
                     <ng-container *ngIf="col.Format == null; else elseFormatNull">
                         {{ rowData.Data[col.FieldName] }}
@@ -45,7 +45,7 @@
             <td>
                 &nbsp;
             </td>
-            <td *ngFor="let col of columns" [hidden]="!col.IsVisible">
+            <td *ngFor="let col of columns" [ngClass]="col.ClassData == null ? '' : col.ClassData">
                     {{expRow.value.Data[col.FieldName]}}
             </td>
         </tr>
@@ -53,7 +53,7 @@
     <ng-template pTemplate="footer" let-columns>
         <tr>
             <td style="width: 3em"></td>
-            <td *ngFor="let col of columns" [hidden]="!col.IsVisible" [ngClass]="col.ClassData == null ? '' : col.ClassData">
+            <td *ngFor="let col of columns" [ngClass]="col.ClassData == null ? '' : col.ClassData">
                <ng-container [ngSwitch]="col.FooterType">
                    <span *ngSwitchCase="FooterType.None">&nbsp;</span>
                    <span *ngSwitchCase="FooterType.RepeatHeader">{{ col.HeaderName }}</span>

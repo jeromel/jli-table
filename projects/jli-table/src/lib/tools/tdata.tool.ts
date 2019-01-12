@@ -2,8 +2,9 @@ import { TRow } from '../entities/TRow';
 import { TData } from '../entities/TData';
 import { IFillExpandableContent } from '../entities/IFillExpandableContent';
 import { ISortEvent } from '../entities/ISortEvent';
+import { TColumn } from '../entities/TColumn';
 
-export class TDataService {
+export class TDataTool {
     public static FormatData(data: any, td: TData, fill:IFillExpandableContent): void {
         let formattedData: Array<TRow> = [];
         data.forEach((res) => {
@@ -73,5 +74,20 @@ export class TDataService {
 
             return event.order * result;
         });
+    }
+
+    public static HideColumn(fieldName: string, data: TData) {
+        let idx: number = data.VisibleColumns.findIndex(x => x.FieldName === fieldName);
+
+        if (-1 == idx) {
+          let col: TColumn = data.Columns.find(x => x.FieldName === fieldName);
+          let idxAdd: number = data.Columns.findIndex(x => x.FieldName === fieldName);
+      
+          if (undefined != col && null != col) {
+            data.VisibleColumns.splice(idxAdd, 0, col);
+          }
+        } else {
+          data.VisibleColumns.splice(idx, 1);
+        }
     }
 }

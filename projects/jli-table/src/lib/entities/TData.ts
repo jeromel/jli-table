@@ -6,6 +6,7 @@ import { Subject, Observable } from 'rxjs';
 export class TData {
     DataKey: string;
     Columns: Array<TColumn>;
+    VisibleColumns: Array<TColumn>;
     Rows: Array<TRow>;
 
     ExpandedRows: IDictionary<number>;
@@ -16,6 +17,8 @@ export class TData {
         return this.OnChangeSub.asObservable();
     }
 
+    RowsPerPageOptions: Array<number>;
+    
     constructor() {
         this.OnChangeSub = new Subject<TData>();
     }

@@ -8,9 +8,6 @@ import { TableModule } from 'primeng/table';
 
 import { JliTableComponent } from '../lib/components/table/jli-table.component';
 import { ValuesPipe } from '../lib/pipes/values.pipe';
-import { TDataService } from '../lib/services/tdata.service';
-
-
 
 @NgModule({
   declarations: [JliTableComponent, ValuesPipe],
@@ -20,7 +17,7 @@ import { TDataService } from '../lib/services/tdata.service';
     NgbModule,
     TableModule,
   ],
-  providers: [TDataService],
+  providers: [],
   exports: [JliTableComponent]
 })
 export class JliTableModule { }
