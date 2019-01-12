@@ -29,6 +29,12 @@ export class JliTableComponent implements OnInit {
   ngOnInit() {
     this._table.dataKey = 'Data.'+this.TData.DataKey;
 
+    if (null == this.TData.VisibleColumns 
+      || undefined == this.TData.VisibleColumns 
+      || 0 == this.TData.VisibleColumns.length) {
+        this.TData.VisibleColumns = Object.assign([], this.TData.Columns);
+      }
+
     this.TData.OnChange().subscribe(x => {
       this.TData.Columns.filter(x => x.FooterType === FooterType.SumPage).forEach(x => {
         this.footerValues[x.FieldName] = this.SumPage(x.FieldName);

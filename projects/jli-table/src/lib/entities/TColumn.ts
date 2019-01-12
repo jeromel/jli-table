@@ -5,7 +5,6 @@ import { FooterType } from './FooterType';
 export abstract class TColumn {
     FieldName: string = '';
     HeaderName: string = '';
-    IsVisible: boolean = true;
     IsSortable: boolean = true;
     IsFilterable: boolean = false;
     
