@@ -27,10 +27,10 @@
             </td>
             <td *ngFor="let col of columns" [ngClass]="col.ClassData == null ? '' : col.ClassData">
                 <div *ngIf="col.Inputs == null; else elseInputsColumnBlock">
-                    <ng-container *ngIf="col.Format == null; else elseFormatNull">
+                    <ng-container *ngIf="col.Format == null; else elseFormatNullRowContent">
                         {{ rowData.Data[col.FieldName] }}
                     </ng-container>
-                    <ng-template #elseFormatNull>
+                    <ng-template #elseFormatNullRowContent>
                         {{ col.Format.transform(rowData.Data[col.FieldName]) }}
                     </ng-template>
                 </div>
@@ -46,7 +46,12 @@
                 &nbsp;
             </td>
             <td *ngFor="let col of columns" [ngClass]="col.ClassData == null ? '' : col.ClassData">
-                    {{expRow.value.Data[col.FieldName]}}
+                <ng-container *ngIf="col.Format == null; else elseFormatNullExpandedContent">
+                    {{ expRow.value.Data[col.FieldName] }}
+                </ng-container>
+                <ng-template #elseFormatNullExpandedContent>
+                    {{ col.Format.transform(expRow.value.Data[col.FieldName]) }}
+                </ng-template>
             </td>
         </tr>
     </ng-template>
