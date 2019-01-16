@@ -1,6 +1,6 @@
 {
   "name": "test-jli-table",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "license": "MIT",
   "readme": "https://github.com/jeromel/jli-table/blob/develop/README.md",
   "scripts": {
@@ -35,7 +35,7 @@
     "@ng-bootstrap/ng-bootstrap": "^4.0.1",
     "core-js": "^2.5.4",
     "font-awesome": "^4.7.0",
-    "jli-table": "file:dist/jli-table/jli-table-0.9.0.tgz",
+    "jli-table": "file:dist/jli-table/jli-table-0.9.1.tgz",
     "primeicons": "^1.0.0",
     "primeng": "^7.0.3",
     "rxjs": "~6.3.3",

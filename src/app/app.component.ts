@@ -67,12 +67,12 @@ export class AppComponent {
   public OnClick(): void {
     this.carService.getCarsSmall().then(result => {
       TDataTool.FormatData(result, this.data, x => {
-        x.ExpandedRows = {};
-        x.Rows.forEach(function (row) {
-            let expandableContent: Array<TRow> = x.Rows.filter(y => y.Data[x.DataKey] >= row.Data[x.DataKey] && y.Data[x.DataKey] < row.Data[x.DataKey]+100 ); 
-            row.ExpandableContent = expandableContent;
-        });
-        x.Rows = x.Rows.filter(y => y.Data[x.DataKey] % 100 == 0);
+        // x.ExpandedRows = {};
+        // x.Rows.forEach(function (row) {
+        //     let expandableContent: Array<TRow> = x.Rows.filter(y => y.Data[x.DataKey] >= row.Data[x.DataKey] && y.Data[x.DataKey] < row.Data[x.DataKey]+100 ); 
+        //     row.ExpandableContent = expandableContent;
+        // });
+        // x.Rows = x.Rows.filter(y => y.Data[x.DataKey] % 100 == 0);
       });
     });
   }
