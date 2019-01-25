@@ -6,7 +6,7 @@ import { Table } from 'primeng/table';
 import { TColumn } from '../../entities/TColumn';
 import { FooterType } from '../../entities/FooterType';
 import { TRow } from '../../entities/TRow';
-import { IDictionary } from 'jli-table/jli-table';
+import { IDictionary } from '../../entities/IDictionary';
 
 @Component({
   selector: 'lib-jli-table',

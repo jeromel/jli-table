@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+.header_scrolled {
+    // position: fixed !important;
+    // top: 60px; 
+}
+
+.ui-table-thead {
+    position: sticky !important;
+    top: 0;
+    position: -webkit-sticky;
+}

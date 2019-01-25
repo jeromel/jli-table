@@ -10,7 +10,6 @@
     #table>
     <ng-template pTemplate="header" let-columns>
         <tr>
-            <th style="width: 3em"></th>
             <th *ngFor="let col of columns" [pSortableColumn]="col.FieldName">
                 <div class="ui-table-header">
                     <div class="ui-table-header-name">{{col.HeaderName}}</div>
@@ -22,32 +21,33 @@
     </ng-template>
     <ng-template pTemplate="body" let-rowData let-expanded="expanded" let-columns="columns">
         <tr>
-            <td>
-                &nbsp;
-                <a href="#" [pRowToggler]="rowData" *ngIf="rowData.ExpandableContent.length > 0">
-                    <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></i>
-                </a>
-            </td>
             <td *ngFor="let col of columns" [ngClass]="col.ClassData == null ? '' : col.ClassData">
-                <div *ngIf="col.Inputs == null; else elseInputsColumnBlock">
-                    <ng-container *ngIf="col.Format == null; else elseFormatNullRowContent">
-                        {{ rowData.Data[col.FieldName] }}
-                    </ng-container>
-                    <ng-template #elseFormatNullRowContent>
-                        {{ col.Format.transform(rowData.Data[col.FieldName]) }}
+                <ng-container *ngIf="col.IsExpandColumn == true; else elseNotExpandColumnBody">
+                    <div>
+                        &nbsp;
+                        <a href="#" [pRowToggler]="rowData" *ngIf="rowData.ExpandableContent.length > 0">
+                            <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></i>
+                        </a>
+                    </div>
+                </ng-container>
+                <ng-template #elseNotExpandColumnBody>
+                    <div *ngIf="col.Inputs == null; else elseInputsColumnBlock">
+                        <ng-container *ngIf="col.Format == null; else elseFormatNullRowContent">
+                            {{ rowData.Data[col.FieldName] }}
+                        </ng-container>
+                        <ng-template #elseFormatNullRowContent>
+                            {{ col.Format.transform(rowData.Data[col.FieldName]) }}
+                        </ng-template>
+                    </div>
+                    <ng-template #elseInputsColumnBlock>
+                        <ng-container *ngTemplateOutlet="col.Inputs; context:rowData"></ng-container>
                     </ng-template>
-                </div>
-                <ng-template #elseInputsColumnBlock>
-                    <ng-container *ngTemplateOutlet="col.Inputs; context:rowData">></ng-container>
                 </ng-template>
             </td>
         </tr>
     </ng-template>
     <ng-template pTemplate="rowexpansion" let-rowData let-columns="columns">
         <tr *ngFor="let expRow of rowData.ExpandableContent | keyvalue">
-            <td>
-                &nbsp;
-            </td>
             <td *ngFor="let col of columns" [ngClass]="col.ClassData == null ? '' : col.ClassData">
                 <ng-container *ngIf="col.Format == null; else elseFormatNullExpandedContent">
                     {{ expRow.value.Data[col.FieldName] }}
@@ -60,18 +60,22 @@
     </ng-template>
     <ng-template pTemplate="footer" let-columns>
         <tr>
-            <td style="width: 3em">&nbsp;</td>
             <td *ngFor="let col of columns" [ngClass]="col.ClassData == null ? '' : col.ClassData">
-               <ng-container [ngSwitch]="col.FooterType">
-                   <span *ngSwitchCase="FooterType.None">&nbsp;</span>
-                   <span *ngSwitchCase="FooterType.RepeatHeader">{{ col.HeaderName }}</span>
-                   <span *ngSwitchCase="FooterType.SumAll">
-                       {{ SumAll(col.FieldName) }}
-                   </span>
-                   <span *ngSwitchCase="FooterType.SumPage">
-                        {{ footerValues[col.FieldName] }}
-                    </span>
-               </ng-container>
+                <ng-container *ngIf="col.IsExpandColumn == true; else elseNotExpandColumnFooter">
+                        <span>&nbsp;</span>
+                </ng-container>
+                <ng-template #elseNotExpandColumnFooter>
+                    <ng-container [ngSwitch]="col.FooterType">
+                        <span *ngSwitchCase="FooterType.None">&nbsp;</span>
+                        <span *ngSwitchCase="FooterType.RepeatHeader">{{ col.HeaderName }}</span>
+                        <span *ngSwitchCase="FooterType.SumAll">
+                            {{ SumAll(col.FieldName) }}
+                        </span>
+                        <span *ngSwitchCase="FooterType.SumPage">
+                                {{ footerValues[col.FieldName] }}
+                            </span>
+                    </ng-container>
+                </ng-template>
             </td>
         </tr>
     </ng-template>
