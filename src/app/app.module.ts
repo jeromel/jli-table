@@ -10,7 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
-import { JliTableModule } from 'jli-table';
+import { JliTableModule } from 'projects/jli-table/src/public_api';
 import { CarService } from 'src/services/car.service';
 import { TableModule } from 'primeng/table';
 
