@@ -41,14 +41,14 @@ export class AppComponent {
   ngOnInit() {
     this.isVin = false;
     this.carTableColumns = [
-      { FieldName:'id', HeaderName:'Histo', IsExpandColumn: true, IsSortable: false, IsFilterable: false, customSort: (() => {}), Inputs: null, FooterType: FooterType.None, Format: null, ClassData: 'td-center' },
-      { FieldName:'id', HeaderName:'Id', IsExpandColumn: false, IsSortable: true, IsFilterable: false, customSort: (event => TDataTool.SimpleSort(event)), Inputs: null, FooterType: FooterType.SumPage, Format: null, ClassData: 'td-center' },
-      { FieldName:'action', HeaderName:'Action', IsExpandColumn: false, IsSortable: false, IsFilterable: false, customSort: (() => {}), Inputs: this.greetTpl, FooterType: FooterType.RepeatHeader, Format: null, ClassData: 'td-center' },
-      { FieldName:'date', HeaderName:'Date', IsExpandColumn: false, IsSortable: true, IsFilterable: false, customSort: (event => TDataTool.DateSort(event)), Inputs: null, FooterType: FooterType.None, Format: null, ClassData: 'td-center' },
-      { FieldName:'vin', HeaderName:'Vin', IsExpandColumn: false, IsSortable: true, IsFilterable: true, customSort: (event => TDataTool.SimpleSort(event)), Inputs: null, FooterType: FooterType.None, Format: null, ClassData: 'td-center' },
-      { FieldName:'year', HeaderName:'Year', IsExpandColumn: false, IsSortable: true, IsFilterable: true, customSort: (event => TDataTool.SimpleSort(event)), Inputs: null, FooterType: FooterType.SumPage, Format: new FrenchDecimalPipe, ClassData: 'td-right' },
-      { FieldName:'brand', HeaderName:'Brand', IsExpandColumn: false, IsSortable: true, IsFilterable: false, customSort: (event => TDataTool.SimpleSort(event)), Inputs: null, FooterType: FooterType.None, Format: null, ClassData: 'td-center' },
-      { FieldName:'color', HeaderName:'Color', IsExpandColumn: false, IsSortable: true, IsFilterable: false, customSort: (event => TDataTool.SimpleSort(event)), Inputs: null, FooterType: FooterType.None, Format: null, ClassData: 'td-center' },
+      { Id: '0', FieldName:'id', HeaderName:'Histo', IsExpandColumn: true, IsSortable: false, IsFilterable: false, customSort: (() => {}), Inputs: null, FooterType: FooterType.None, Format: null, ClassData: 'td-center' },
+      { Id: '1', FieldName:'id', HeaderName:'Id', IsExpandColumn: false, IsSortable: true, IsFilterable: false, customSort: (event => TDataTool.SimpleSort(event)), Inputs: null, FooterType: FooterType.SumPage, Format: null, ClassData: 'td-center' },
+      { Id: '2', FieldName:'action', HeaderName:'Action', IsExpandColumn: false, IsSortable: false, IsFilterable: false, customSort: (() => {}), Inputs: this.greetTpl, FooterType: FooterType.RepeatHeader, Format: null, ClassData: 'td-center' },
+      { Id: '3', FieldName:'date', HeaderName:'Date', IsExpandColumn: false, IsSortable: true, IsFilterable: false, customSort: (event => TDataTool.DateSort(event)), Inputs: null, FooterType: FooterType.None, Format: null, ClassData: 'td-center' },
+      { Id: '4', FieldName:'vin', HeaderName:'Vin', IsExpandColumn: false, IsSortable: true, IsFilterable: true, customSort: (event => TDataTool.SimpleSort(event)), Inputs: null, FooterType: FooterType.None, Format: null, ClassData: 'td-center' },
+      { Id: '5', FieldName:'year', HeaderName:'Year', IsExpandColumn: false, IsSortable: true, IsFilterable: true, customSort: (event => TDataTool.SimpleSort(event)), Inputs: null, FooterType: FooterType.SumPage, Format: new FrenchDecimalPipe, ClassData: 'td-right' },
+      { Id: '6', FieldName:'brand', HeaderName:'Brand', IsExpandColumn: false, IsSortable: true, IsFilterable: false, customSort: (event => TDataTool.SimpleSort(event)), Inputs: null, FooterType: FooterType.None, Format: null, ClassData: 'td-center' },
+      { Id: '7', FieldName:'color', HeaderName:'Color', IsExpandColumn: false, IsSortable: true, IsFilterable: false, customSort: (event => TDataTool.SimpleSort(event)), Inputs: null, FooterType: FooterType.None, Format: null, ClassData: 'td-center' },
   ];
     this.data = new TData();
     this.data.DataKey = this.carTableColumns[0].FieldName;
@@ -63,8 +63,9 @@ export class AppComponent {
   public isVin: boolean;
   public ShowVin() {
     this.isVin = !this.isVin;
-    
-    TDataTool.HideColumn('vin', this.data);
+    console.debug(TDataTool.IsColumnVisible('4', this.data));
+    TDataTool.ShowHideColumn('4', this.data);
+    console.debug(TDataTool.IsColumnVisible('4', this.data));
   }
 
   public OnClick(): void {

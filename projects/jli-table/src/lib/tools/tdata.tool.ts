@@ -76,12 +76,23 @@ export class TDataTool {
         });
     }
 
-    public static HideColumn(fieldName: string, data: TData) {
-        let idx: number = data.VisibleColumns.findIndex(x => x.FieldName === fieldName);
+    public static IsColumnVisible(id: string, data: TData): boolean {
+        let idx: number = data.VisibleColumns.findIndex(x => x.Id == id);
+        let ret: boolean = false;
+
+        if (-1 !== idx) {
+            ret = true;
+        }
+
+        return ret;
+    }
+
+    public static ShowHideColumn(id: string, data: TData) {
+        let idx: number = data.VisibleColumns.findIndex(x => x.Id === id);
 
         if (-1 == idx) {
-          let col: TColumn = data.Columns.find(x => x.FieldName === fieldName);
-          let idxAdd: number = data.Columns.findIndex(x => x.FieldName === fieldName);
+          let col: TColumn = data.Columns.find(x => x.Id === id);
+          let idxAdd: number = data.Columns.findIndex(x => x.Id === id);
       
           if (undefined != col && null != col) {
             data.VisibleColumns.splice(idxAdd, 0, col);
