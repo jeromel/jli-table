@@ -8,6 +8,9 @@
     (onFilter)="onFilter($event)"
     (onPage)="onPage($event)"
     #table>
+    <ng-template pTemplate="paginatorright">
+        <span>lignes par page</span>
+    </ng-template>
     <ng-template pTemplate="header" let-columns>
         <tr>
             <th *ngFor="let col of columns" [pSortableColumn]="col.FieldName">
