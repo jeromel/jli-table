@@ -6,3 +6,5 @@ export * from './ISortEvent';
 export * from './IFillExpandableContent';
 export * from './IDictionary';
 export * from './FooterType';
+export * from './THeaderCell';
+export * from './THeaderRow';
