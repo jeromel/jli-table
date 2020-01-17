@@ -3,6 +3,7 @@ import { TemplateRef, PipeTransform } from '@angular/core';
 import { FooterType } from './FooterType';
 
 export abstract class TColumn {
+    Id: string = '';
     FieldName: string = '';
     HeaderName: string = '';
     IsExpandColumn: boolean = false;
