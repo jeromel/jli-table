@@ -9,6 +9,7 @@ import { CarService } from 'src/services/car.service';
 import {faEdit, faLock, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import { FooterType } from 'projects/jli-table/src/public_api';
 import { FrenchDecimalPipe } from 'src/pipes/french-decimal.pipe';
+import { THeaderRow } from 'projects/jli-table/src/lib/entities/THeaderRow';
 
 
 @Component({
@@ -29,8 +30,10 @@ export class AppComponent {
 
   title = 'test-jli-table';
 
-  carTableColumns: Array<TColumn> = [];
+  columnsConfig: Array<TColumn> = [];
     
+
+  headerConfig: Array<THeaderRow> = [];
 
   data: TData;
 
@@ -40,7 +43,14 @@ export class AppComponent {
 
   ngOnInit() {
     this.isVin = false;
-    this.carTableColumns = [
+
+    this.headerConfig = [
+      { Cells: [ { HeaderName: 'MasterHeaderRow1', ColSpan: 1, RowSpan: 3} ] },
+      { Cells: [ { HeaderName: 'MasterHeaderRow2', ColSpan: 7, RowSpan: 1} ] },
+      { Cells: [ { HeaderName: 'MasterHeaderRow3', ColSpan: 4, RowSpan: 1}, { HeaderName: 'MasterHeaderRow3', ColSpan: 3, RowSpan: 1} ] },
+    ];
+
+    this.columnsConfig = [
       { Id: '0', FieldName:'id', HeaderName:'Histo', IsExpandColumn: true, IsSortable: false, IsFilterable: false, customSort: (() => {}), Inputs: null, FooterType: FooterType.None, Format: null, ClassData: 'td-center' },
       { Id: '1', FieldName:'id', HeaderName:'Id', IsExpandColumn: false, IsSortable: true, IsFilterable: false, customSort: (event => TDataTool.SimpleSort(event)), Inputs: null, FooterType: FooterType.SumPage, Format: null, ClassData: 'td-center' },
       { Id: '2', FieldName:'action', HeaderName:'Action', IsExpandColumn: false, IsSortable: false, IsFilterable: false, customSort: (() => {}), Inputs: this.greetTpl, FooterType: FooterType.RepeatHeader, Format: null, ClassData: 'td-center' },
@@ -51,8 +61,9 @@ export class AppComponent {
       { Id: '7', FieldName:'color', HeaderName:'Color', IsExpandColumn: false, IsSortable: true, IsFilterable: false, customSort: (event => TDataTool.SimpleSort(event)), Inputs: null, FooterType: FooterType.None, Format: null, ClassData: 'td-center' },
   ];
     this.data = new TData();
-    this.data.DataKey = this.carTableColumns[0].FieldName;
-    this.data.Columns = this.carTableColumns;
+    this.data.DataKey = this.columnsConfig[0].FieldName;
+    this.data.HeaderConfig = this.headerConfig;
+    this.data.Columns = this.columnsConfig;
     this.data.ExpandedRows = {};
     for(let col of this.data.Columns) {
       this.data.ExpandedRows[col.FieldName] = 0;
