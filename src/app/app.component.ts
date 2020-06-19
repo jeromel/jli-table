@@ -45,9 +45,8 @@ export class AppComponent {
     this.isVin = false;
 
     this.headerConfig = [
-      { Cells: [ { HeaderName: 'MasterHeaderRow1', ColSpan: 1, RowSpan: 3} ] },
-      { Cells: [ { HeaderName: 'MasterHeaderRow2', ColSpan: 7, RowSpan: 1} ] },
-      { Cells: [ { HeaderName: 'MasterHeaderRow3', ColSpan: 4, RowSpan: 1}, { HeaderName: 'MasterHeaderRow3', ColSpan: 3, RowSpan: 1} ] },
+      { Cells: [ { HeaderName: 'MHR1', ColSpan: 1, RowSpan: 2} , { HeaderName: 'MHR2', ColSpan: 7, RowSpan: 1} ] },
+      { Cells: [ { HeaderName: 'MasterHeaderRow3', ColSpan: 4, RowSpan: 1}, { HeaderName: 'MasterHeaderRow4', ColSpan: 3, RowSpan: 1} ] },
     ];
 
     this.columnsConfig = [
