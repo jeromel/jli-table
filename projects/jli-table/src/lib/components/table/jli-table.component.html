@@ -12,6 +12,13 @@
         <span>lignes par page</span>
     </ng-template>
     <ng-template pTemplate="header" let-columns>
+        <tr *ngFor="let head of TData.HeaderConfig">
+            <th *ngFor="let cell of head.Cells" [colSpan]="cell.ColSpan" [rowSpan]="cell.RowSpan">
+                <div class="ui-table-header">
+                    <div class="ui-table-header-span-name">{{cell.HeaderName}}</div>
+                </div>
+            </th>
+        </tr>
         <tr>
             <th *ngFor="let col of columns" [pSortableColumn]="col.FieldName">
                 <div class="ui-table-header">
