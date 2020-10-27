@@ -9,8 +9,12 @@ export abstract class TColumn {
     IsExpandColumn: boolean = false;
     IsSortable: boolean = true;
     IsFilterable: boolean = false;
+
     
-    public FooterType: FooterType = FooterType.None;
+    
+    public FooterType: FooterType = null;
+
+    public FooterTitle: TemplateRef<any> = null;
 
     public abstract customSort(event: ISortEvent);
 

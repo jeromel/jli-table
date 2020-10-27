@@ -20,6 +20,7 @@ import { THeaderRow } from 'projects/jli-table/src/lib/entities/THeaderRow';
 export class AppComponent {
 
   @ViewChild('greet') greetTpl: TemplateRef<any>;
+  @ViewChild('FooterTitle') FooterTitleTpl: TemplateRef<any>;
   faEdit = faEdit;
   faLock = faLock;
   faTrashAlt = faTrashAlt;
@@ -50,14 +51,14 @@ export class AppComponent {
     ];
 
     this.columnsConfig = [
-      { Id: '0', FieldName:'id', HeaderName:'Histo', IsExpandColumn: true, IsSortable: false, IsFilterable: false, customSort: (() => {}), Inputs: null, FooterType: FooterType.None, Format: null, ClassData: 'td-center' },
-      { Id: '1', FieldName:'id', HeaderName:'Id', IsExpandColumn: false, IsSortable: true, IsFilterable: false, customSort: (event => TDataTool.SimpleSort(event)), Inputs: null, FooterType: FooterType.SumPage, Format: null, ClassData: 'td-center' },
-      { Id: '2', FieldName:'action', HeaderName:'Action', IsExpandColumn: false, IsSortable: false, IsFilterable: false, customSort: (() => {}), Inputs: this.greetTpl, FooterType: FooterType.RepeatHeader, Format: null, ClassData: 'td-center' },
-      { Id: '3', FieldName:'date', HeaderName:'Date', IsExpandColumn: false, IsSortable: true, IsFilterable: false, customSort: (event => TDataTool.DateSort(event)), Inputs: null, FooterType: FooterType.None, Format: null, ClassData: 'td-center' },
-      { Id: '4', FieldName:'vin', HeaderName:'Vin', IsExpandColumn: false, IsSortable: true, IsFilterable: true, customSort: (event => TDataTool.SimpleSort(event)), Inputs: null, FooterType: FooterType.None, Format: null, ClassData: 'td-center' },
-      { Id: '5', FieldName:'year', HeaderName:'Year', IsExpandColumn: false, IsSortable: true, IsFilterable: true, customSort: (event => TDataTool.SimpleSort(event)), Inputs: null, FooterType: FooterType.SumPage, Format: new FrenchDecimalPipe, ClassData: 'td-right' },
-      { Id: '6', FieldName:'brand', HeaderName:'Brand', IsExpandColumn: false, IsSortable: true, IsFilterable: false, customSort: (event => TDataTool.SimpleSort(event)), Inputs: null, FooterType: FooterType.None, Format: null, ClassData: 'td-center' },
-      { Id: '7', FieldName:'color', HeaderName:'Color', IsExpandColumn: false, IsSortable: true, IsFilterable: false, customSort: (event => TDataTool.SimpleSort(event)), Inputs: null, FooterType: FooterType.None, Format: null, ClassData: 'td-center' },
+      { Id: '0', FieldName:'id', HeaderName:'Histo', IsExpandColumn: true, IsSortable: false, IsFilterable: false, customSort: (() => {}), Inputs: null, FooterType: FooterType.Title, FooterTitle: this.FooterTitleTpl, Format: null, ClassData: 'td-center' },
+      { Id: '1', FieldName:'id', HeaderName:'Id', IsExpandColumn: false, IsSortable: true, IsFilterable: false, customSort: (event => TDataTool.SimpleSort(event)), Inputs: null, FooterType: FooterType.SumPage, FooterTitle: null, Format: null, ClassData: 'td-center' },
+      { Id: '2', FieldName:'action', HeaderName:'Action', IsExpandColumn: false, IsSortable: false, IsFilterable: false, customSort: (() => {}), Inputs: this.greetTpl, FooterType: FooterType.RepeatHeader, FooterTitle: null, Format: null, ClassData: 'td-center' },
+      { Id: '3', FieldName:'date', HeaderName:'Date', IsExpandColumn: false, IsSortable: true, IsFilterable: false, customSort: (event => TDataTool.DateSort(event)), Inputs: null, FooterType: FooterType.None,FooterTitle: null, Format: null, ClassData: 'td-center' },
+      { Id: '4', FieldName:'vin', HeaderName:'Vin', IsExpandColumn: false, IsSortable: true, IsFilterable: true, customSort: (event => TDataTool.SimpleSort(event)), Inputs: null, FooterType: FooterType.None,FooterTitle: null, Format: null, ClassData: 'td-center' },
+      { Id: '5', FieldName:'year', HeaderName:'Year', IsExpandColumn: false, IsSortable: true, IsFilterable: true, customSort: (event => TDataTool.SimpleSort(event)), Inputs: null, FooterType: FooterType.SumPage,FooterTitle: null, Format: new FrenchDecimalPipe, ClassData: 'td-right' },
+      { Id: '6', FieldName:'brand', HeaderName:'Brand', IsExpandColumn: false, IsSortable: true, IsFilterable: false, customSort: (event => TDataTool.SimpleSort(event)), Inputs: null, FooterType: FooterType.None,FooterTitle: null, Format: null, ClassData: 'td-center' },
+      { Id: '7', FieldName:'color', HeaderName:'Color', IsExpandColumn: false, IsSortable: true, IsFilterable: false, customSort: (event => TDataTool.SimpleSort(event)), Inputs: null, FooterType: FooterType.None,FooterTitle: null, Format: null, ClassData: 'td-center' },
   ];
     this.data = new TData();
     this.data.DataKey = this.columnsConfig[0].FieldName;
