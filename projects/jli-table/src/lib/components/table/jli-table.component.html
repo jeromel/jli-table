@@ -71,11 +71,11 @@
     <ng-template pTemplate="footer" let-columns>
         <tr>
             <td *ngFor="let col of columns" [ngClass]="col.ClassData == null ? '' : col.ClassData">
-                <ng-container *ngIf="col.IsExpandColumn == true; else elseNotExpandColumnFooter">
+                <ng-container *ngIf="col.IsExpandColumn == true">
                         <span>&nbsp;</span>
                 </ng-container>
-                <ng-template #elseNotExpandColumnFooter>
-                    <ng-container [ngSwitch]="col.FooterType">
+                
+                <ng-container [ngSwitch]="col.FooterType">
                         <span *ngSwitchCase="FooterType.None">&nbsp;</span>
                         <span *ngSwitchCase="FooterType.RepeatHeader">{{ col.HeaderName }}</span>
                         <span *ngSwitchCase="FooterType.SumAll">
@@ -83,9 +83,12 @@
                         </span>
                         <span *ngSwitchCase="FooterType.SumPage">
                                 {{ footerValues[col.FieldName] }}
-                            </span>
-                    </ng-container>
-                </ng-template>
+                        </span>
+                        <span *ngSwitchCase="FooterType.Title">
+                        <ng-container *ngTemplateOutlet="col.FooterTitle; context:col"></ng-container>
+                         </span>
+                </ng-container>
+                
             </td>
         </tr>
     </ng-template>
