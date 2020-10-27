@@ -43,3 +43,7 @@ testem.log
 Thumbs.db
 
 projects/jli-table/\.npmrc
+
+.vs/jli-table/v16/
+
+.vs/
