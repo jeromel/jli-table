@@ -140,4 +140,9 @@ export class JliTableComponent implements OnInit {
         this.footerValues[x.FieldName] = this.SumPage(x.FieldName, filtered);
     });
   }
+
+  OnClickTest(){
+    console.debug("TTTTTTTTTTTEST");
+  }
+
 }
