@@ -30,7 +30,7 @@
       <a><fa-icon class="far" [icon]="faTrashAlt"></fa-icon></a>
   </ng-template>
   
-  <lib-jli-table [TData]="data" [rowsPerPageDefault]="5"></lib-jli-table>
+  <lib-jli-table #table [TData]="data" [rowsPerPageDefault]="5"></lib-jli-table>
 
   <ng-template #FooterTitle>
     Cumul
