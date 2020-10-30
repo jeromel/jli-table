@@ -1,0 +1,1 @@
+export * from './table/jli-table.component';
