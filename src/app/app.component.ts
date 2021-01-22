@@ -20,9 +20,9 @@ import { JliTableComponent } from 'projects/jli-table/src/lib/components/table/j
 })
 export class AppComponent {
 
-  @ViewChild('greet') greetTpl: TemplateRef<any>;
-  @ViewChild('FooterTitle') FooterTitleTpl: TemplateRef<any>;
-  @ViewChild('IsClickableTpl') IsClickableTpl: TemplateRef<any>;
+  @ViewChild('greet', {static: false}) greetTpl: TemplateRef<any>;
+  @ViewChild('FooterTitle' , {static: false}) FooterTitleTpl: TemplateRef<any>;
+  @ViewChild('IsClickableTpl', {static: false}) IsClickableTpl: TemplateRef<any>;
   @ViewChild('table') tableTpl: JliTableComponent;
 
   faEdit = faEdit;
