@@ -10,6 +10,7 @@ import {faEdit, faLock, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import { FooterType } from 'projects/jli-table/src/public_api';
 import { FrenchDecimalPipe } from 'src/pipes/french-decimal.pipe';
 import { THeaderRow } from 'projects/jli-table/src/lib/entities/THeaderRow';
+import { JliTableComponent } from 'projects/jli-table/src/lib/components/table/jli-table.component';
 
 
 @Component({
@@ -22,6 +23,8 @@ export class AppComponent {
   @ViewChild('greet') greetTpl: TemplateRef<any>;
   @ViewChild('FooterTitle') FooterTitleTpl: TemplateRef<any>;
   @ViewChild('IsClickableTpl') IsClickableTpl: TemplateRef<any>;
+  @ViewChild('table') tableTpl: JliTableComponent;
+
   faEdit = faEdit;
   faLock = faLock;
   faTrashAlt = faTrashAlt;
@@ -83,13 +86,14 @@ export class AppComponent {
   public OnClick(): void {
     this.carService.getCars().then(result => {
       TDataTool.FormatData(result, this.data, x => {
+        this.tableTpl.resetSort();
         x.ExpandedRows = {};
         x.Rows.forEach(function (row) {
             let expandableContent: Array<TRow> = x.Rows.filter(y => y.Data[x.DataKey] >= row.Data[x.DataKey] && y.Data[x.DataKey] < row.Data[x.DataKey]+100 ); 
             row.ExpandableContent = expandableContent;
         });
         x.Rows = x.Rows.filter(y => y.Data[x.DataKey] % 100 == 0);
-      });
+      });     
     });
   }
 

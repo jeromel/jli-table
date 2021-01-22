@@ -52,6 +52,12 @@ export class JliTableComponent implements OnInit {
     this.footerValues = {};
   }
 
+  public resetSort(){
+    this._table.sortOrder = 0;
+    this._table.sortField  ='';
+    this._table.reset();
+  }
+
   public customSort(event: SortEvent): void {
     let col: TColumn = this.TData.Columns.find(x => x.FieldName == event.field);
     
