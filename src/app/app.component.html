@@ -24,18 +24,17 @@
   
   <div appTest>test</div>
   
-  <ng-template #greet let-data="Data">
-      <a (click)="EditDemande(data['id'])"><fa-icon class="far" [icon]="faEdit"></fa-icon></a>
-      <a><fa-icon class="far" [icon]="faLock"></fa-icon></a>
-      <a><fa-icon class="far" [icon]="faTrashAlt"></fa-icon></a>
-  </ng-template>
-  
   <lib-jli-table #table [TData]="data" [rowsPerPageDefault]="5"></lib-jli-table>
 
-  <ng-template #FooterTitle>
+ <ng-template #FooterTitle>
     Cumul
  </ng-template>
 
+ <ng-template #greet let-data="Data">
+  <a (click)="EditDemande(data['id'])"><fa-icon class="far" [icon]="faEdit"></fa-icon></a>
+  <a><fa-icon class="far" [icon]="faLock"></fa-icon></a>
+  <a><fa-icon class="far" [icon]="faTrashAlt"></fa-icon></a>
+</ng-template>
 
  <ng-template #IsClickableTpl let-data="Data">
   <a> 

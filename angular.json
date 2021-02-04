@@ -10,13 +10,16 @@
       "prefix": "app",
       "schematics": {
         "@schematics/angular:component": {
-          "styleext": "scss"
+          "style": "scss"
         }
       },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "aot": true,
+            "vendorSourceMap": true,
+            "preserveSymlinks": true,
             "outputPath": "dist/test-jli-table",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -57,6 +60,10 @@
                   "type": "initial",
                   "maximumWarning": "2mb",
                   "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
                 }
               ]
             }
@@ -157,7 +164,8 @@
           "configurations": {
             "production": {
               "project": "projects/jli-table/ng-package.prod.json"
-            }
+            ,              "tsConfig": "projects/jli-table/tsconfig.lib.prod.json"
+}
           }
         },
         "test": {

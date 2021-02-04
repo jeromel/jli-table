@@ -1,34 +1,36 @@
-import { Component, OnInit, Input, ViewChild, ViewContainerRef, TemplateRef } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, AfterViewInit } from '@angular/core';
 import { TData } from '../../entities/TData';
 
-import { SortEvent } from 'primeng/components/common/sortevent';
 import { Table } from 'primeng/table';
 import { TColumn } from '../../entities/TColumn';
 import { FooterType } from '../../entities/FooterType';
 import { TRow } from '../../entities/TRow';
 import { IDictionary } from '../../entities/IDictionary';
+import { SortEvent } from 'primeng';
 
 @Component({
   selector: 'lib-jli-table',
   templateUrl: './jli-table.component.html',
   styleUrls: ['./jli-table.component.scss']
 })
-export class JliTableComponent implements OnInit {
-  @Input() TData: TData;
 
-  @ViewChild('table') private _table: Table;
+export class JliTableComponent implements OnInit, AfterViewInit {
+  @Input() TData: TData;
+  @Input() rowsPerPageDefault: number;
+
+  @ViewChild('jliTable', { static: false}) _table: Table;
 
   public FooterType = FooterType;
 
   public footerValues: IDictionary<string>;
-
-  @Input() rowsPerPageDefault: number;
   
   constructor() { }
 
-  ngOnInit() {
+  ngAfterViewInit() {
     this._table.dataKey = 'Data.'+this.TData.DataKey;
+  }
 
+  ngOnInit() {
     if (null == this.TData.VisibleColumns 
       || undefined == this.TData.VisibleColumns 
       || 0 == this.TData.VisibleColumns.length) {
@@ -53,9 +55,9 @@ export class JliTableComponent implements OnInit {
   }
 
   public resetSort(){
-    this._table.sortOrder = 0;
-    this._table.sortField  ='';
-    this._table.reset();
+    // this._table.sortOrder = 0;
+    // this._table.sortField  ='';
+    // this._table.reset();
   }
 
   public customSort(event: SortEvent): void {
@@ -69,7 +71,7 @@ export class JliTableComponent implements OnInit {
   }
 
   public customFilter(value, field, matchMode = ''): void {
-    this._table.filter(value, 'Data.'+field, matchMode);
+    // this._table.filter(value, 'Data.'+field, matchMode);
   }
 
   public SumAll(fieldName: string): string {
@@ -146,9 +148,4 @@ export class JliTableComponent implements OnInit {
         this.footerValues[x.FieldName] = this.SumPage(x.FieldName, filtered);
     });
   }
-
-  OnClickTest(){
-    console.debug("TTTTTTTTTTTEST");
-  }
-
 }
