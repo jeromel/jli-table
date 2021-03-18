@@ -14,8 +14,6 @@ import { JliTableModule } from 'projects/jli-table/src/public_api';
 import { CarService } from 'src/services/car.service';
 import { TableModule } from 'primeng/table';
 
-import { FrenchDecimalPipe } from 'src/pipes/french-decimal.pipe';
-
 @NgModule({
   declarations: [
     AppComponent

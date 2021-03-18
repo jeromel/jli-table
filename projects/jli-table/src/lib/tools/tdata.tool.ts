@@ -6,19 +6,21 @@ import { TColumn } from '../entities/TColumn';
 
 export class TDataTool {
     public static FormatData(data: any, td: TData, fill:IFillExpandableContent): void {
-        let formattedData: Array<TRow> = [];
-        data.forEach((res) => {
-            let row: TRow = new TRow;
-            Object.keys(res).forEach(key => {
-                row.Data[key] = res[key];
+        if (td) {
+            let formattedData: Array<TRow> = [];
+            data.forEach((res) => {
+                let row: TRow = new TRow;
+                Object.keys(res).forEach(key => {
+                    row.Data[key] = res[key];
+                });
+    
+                formattedData.push(row);
             });
-
-            formattedData.push(row);
-        });
-
-        td.Rows = formattedData;
-        fill(td);
-        td.OnChangeSub.next(td);
+    
+            td.Rows = formattedData;
+            fill(td);
+            td.OnChangeSub.next(td);
+        }
     }
 
     public static SimpleSort(event: ISortEvent): void {
