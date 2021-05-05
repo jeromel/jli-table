@@ -13,10 +13,14 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { JliTableModule } from 'projects/jli-table/src/public_api';
 import { CarService } from 'src/services/car.service';
 import { TableModule } from 'primeng/table';
+import { DataViewModule } from 'primeng/dataview';
+import { ButtonModule } from 'primeng/button';
+
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -25,9 +29,14 @@ import { TableModule } from 'primeng/table';
     HttpClientModule,
     FontAwesomeModule,
     JliTableModule,
-    TableModule
+    TableModule,
+    DataViewModule,
+    ButtonModule,
+ 
   ],
-  providers: [CarService],
+  providers: [CarService,
+    
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

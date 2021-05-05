@@ -47,3 +47,7 @@ projects/jli-table/\.npmrc
 .vs/jli-table/v16/
 
 .vs/
+
+projects/jli-table/node_modules/
+
+test-jli-table-1.2.0.tgz

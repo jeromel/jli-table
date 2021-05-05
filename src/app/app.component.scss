@@ -1,0 +1,83 @@
+::ng-deep .personne-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+  
+  ::ng-deep .personne-description {
+    margin: 0 0 1rem 0;
+    
+  }
+  
+  ::ng-deep .product-category-icon {
+    vertical-align: middle;
+    margin-right: .5rem;
+  }
+  
+  ::ng-deep .product-category {
+    font-weight: 600;
+    vertical-align: middle;
+  }
+  
+  ::ng-deep .product-list-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    
+    border-bottom: solid gray;
+    border-bottom-width: thick;
+    border-width: 0 0 1px 0;
+  }
+  
+  img {
+    width: 150px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    margin-right: 2rem;
+  }
+  
+  
+  
+  ::ng-deep .p-rating {
+    margin: 0 0 .5rem 0;
+  }
+  
+  ::ng-deep .product-price {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: .5rem;
+    align-self: flex-end;
+  }
+  
+  ::ng-deep .personne-list-mid {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 0;
+  }
+  
+  ::ng-deep .personne-list-right {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  ::ng-deep .p-button {
+    margin-bottom: .5rem;
+  }
+  
+  .p-dataview.p-dataview-list .p-dataview-content  .p-grid  div {
+  
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  .card {
+    padding: 2rem;
+    box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 1px 3px 0 rgba(0, 0, 0, 0.12);
+    border-radius: 4px;
+    margin-bottom: 2rem;
+    width: 65%;
+    margin-left: 20%;
+  }
