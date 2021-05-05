@@ -1,7 +1,7 @@
 <p-table [columns]="TData.VisibleColumns" [value]="TData.Rows"
     [rowExpandMode]="'single'"
     [expandedRowKeys]="TData.ExpandedRows"
-    [paginator]="true" [rows]="rowsPerPageDefault" [rowsPerPageOptions]="TData.RowsPerPageOptions" [paginatorPosition]="'both'"
+    [paginator]="true" [rows]="rowsPerPageDefault" [rowsPerPageOptions]="TData.RowsPerPageOptions" [paginatorPosition]="'top'"
     [customSort]="true"
     (sortFunction)="customSort($event)"
     (onSort)="onSort($event)"
@@ -20,10 +20,10 @@
             </th>
         </tr>
         <tr>
-            <th *ngFor="let col of columns" [pSortableColumn]="col.FieldName">
+            <th *ngFor="let col of columns" [pSortableColumn]="col.Id">
                 <div class="ui-table-header">
                     <div class="ui-table-header-name">{{col.HeaderName}}</div>
-                    <div *ngIf="col.IsSortable" class="ui-table-header-sorticon"><p-sortIcon [field]="col.FieldName" ariaLabel="Tri les données" ariaLabelDesc="Tri dans l'ordre décroissant" ariaLabelAsc="Tri dans l'ordre croissant"></p-sortIcon></div>
+                    <div *ngIf="col.IsSortable" class="ui-table-header-sorticon"><p-sortIcon [field]="col.Id" ariaLabel="Tri les données" ariaLabelDesc="Tri dans l'ordre décroissant" ariaLabelAsc="Tri dans l'ordre croissant"></p-sortIcon></div>
                     <div *ngIf="col.IsFilterable" class="ui-table-header-filter" ><input pInputText type="text" (input)="customFilter($event.target.value, col.FieldName)" (click)="$event.stopPropagation()"/></div>
                 </div>
             </th>

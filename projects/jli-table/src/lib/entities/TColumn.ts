@@ -9,6 +9,7 @@ export abstract class TColumn {
     IsExpandColumn: boolean = false;
     IsSortable: boolean = true;
     IsFilterable: boolean = false;
+    IsVisible: boolean = true;
  
 
     public IsClickableTpl: TemplateRef<any> = null;

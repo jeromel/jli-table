@@ -18,7 +18,7 @@ export class JliTableComponent implements OnInit, AfterViewInit {
   @Input() TData: TData;
   @Input() rowsPerPageDefault: number;
 
-  @ViewChild('jliTable', { static: false}) _table: Table;
+  @ViewChild('jliTable', { static: true}) _table: Table;
 
   public FooterType = FooterType;
 
@@ -31,12 +31,7 @@ export class JliTableComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    if (null == this.TData.VisibleColumns 
-      || undefined == this.TData.VisibleColumns 
-      || 0 == this.TData.VisibleColumns.length) {
-        this.TData.VisibleColumns = Object.assign([], this.TData.Columns);
-      }
-
+  
     this.TData.OnChange().subscribe(x => {
       this.TData.Columns.filter(x => x.FooterType === FooterType.SumPage).forEach(x => {
         this.footerValues[x.FieldName] = this.SumPage(x.FieldName);
@@ -55,16 +50,18 @@ export class JliTableComponent implements OnInit, AfterViewInit {
   }
 
   public resetSort(){
-    // this._table.sortOrder = 0;
-    // this._table.sortField  ='';
-    // this._table.reset();
+    this._table.sortOrder = 0;
+    this._table.sortField  ='';
+    this._table.reset();
   }
 
   public customSort(event: SortEvent): void {
-    let col: TColumn = this.TData.Columns.find(x => x.FieldName == event.field);
+   
+    let col: TColumn = this.TData.Columns.find(x => x.Id == event.field);
     
     if (null != col) {
       if (col.IsSortable) {
+        event.field = col.FieldName;
         col.customSort(event);
       }
     }

@@ -26,7 +26,6 @@ export class TDataTool {
     public static SimpleSort(event: ISortEvent): void {
         event.data.sort((data1, data2) => {
             let result = 0;
-
             let v1 = data1.Data[event.field];
             let v2 = data2.Data[event.field];
 
@@ -44,7 +43,7 @@ export class TDataTool {
             else {
                 result = (v1 == v2) ? 0 : (v1 > v2) ? 1 : -1;
             }
-
+            
             return event.order * result;
         });
     }
@@ -89,18 +88,38 @@ export class TDataTool {
         return ret;
     }
 
-    public static ShowHideColumn(id: string, data: TData) {
-        let idx: number = data.VisibleColumns.findIndex(x => x.Id === id);
+    public static HideColumn(id: string, data: TData): TColumn[] {
+        
+        data.Columns.find( x => {
+            if(x.Id == id){
+                x.IsVisible = false;
+            }
+        })
 
-        if (-1 == idx) {
-          let col: TColumn = data.Columns.find(x => x.Id === id);
-          let idxAdd: number = data.Columns.findIndex(x => x.Id === id);
-      
-          if (undefined != col && null != col) {
-            data.VisibleColumns.splice(idxAdd, 0, col);
-          }
-        } else {
-          data.VisibleColumns.splice(idx, 1);
-        }
+        this.configureColumns(data);
+
+        return  data.VisibleColumns;
     }
+
+    public static configureColumns(data: TData){
+        data.VisibleColumns = [];
+        data.Columns.forEach(x =>  {
+          if ( x.IsVisible == true){
+            data.VisibleColumns.push(x);
+          
+          }
+        });
+
+       
+      }
+
+      public static resetVisibleColumns(data: TData){
+        data.Columns.forEach(x =>  {
+            if (x.IsVisible == false){
+                x.IsVisible = true;
+              }
+          });
+
+      }
 }
+

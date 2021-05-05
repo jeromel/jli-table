@@ -3,6 +3,7 @@ import { TRow } from './TRow';
 import { IDictionary } from './IDictionary';
 import { Subject, Observable } from 'rxjs';
 import { THeaderRow } from './THeaderRow';
+import { TDataTool } from '../tools/tdata.tool';
 
 export class TData {
     DataKey: string;
@@ -24,4 +25,6 @@ export class TData {
     constructor() {
         this.OnChangeSub = new Subject<TData>();
     }
+
+   
 }
