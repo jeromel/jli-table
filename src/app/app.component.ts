@@ -82,6 +82,8 @@ export class AppComponent {
 
     TDataTool.configureColumns(this.data);
     
+
+    this.OnClick();
   }
 
 
