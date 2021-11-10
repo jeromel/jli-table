@@ -51,3 +51,5 @@ projects/jli-table/\.npmrc
 projects/jli-table/node_modules/
 
 test-jli-table-1.2.0.tgz
+
+package-lock.json
