@@ -910,10 +910,12 @@ body {
     width: 100%;
   }
 
-  .ui-table-thead {
-      position: sticky;
-      top: 0;
-  }
+  .ui-table .ui-table-thead
+    tr:nth-child(1n)  {
+    position: -webkit-sticky !important;    
+    position: sticky !important;
+    top: 0px;
+}
   
   .ui-table-tfoot {
     font-weight: 900;

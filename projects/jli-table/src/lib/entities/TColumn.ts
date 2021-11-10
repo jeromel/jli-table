@@ -12,7 +12,7 @@ export abstract class TColumn {
     IsVisible: boolean = true;
  
 
-    public IsClickableTpl: TemplateRef<any> = null;
+    public RowExpandedInputs: TemplateRef<any> = null;
 
     
     

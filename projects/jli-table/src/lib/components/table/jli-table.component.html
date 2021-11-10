@@ -1,13 +1,8 @@
-<p-table [columns]="TData.VisibleColumns" [value]="TData.Rows"
-    [rowExpandMode]="'single'"
-    [expandedRowKeys]="TData.ExpandedRows"
-    [paginator]="true" [rows]="rowsPerPageDefault" [rowsPerPageOptions]="TData.RowsPerPageOptions" [paginatorPosition]="'top'"
-    [customSort]="true"
-    (sortFunction)="customSort($event)"
-    (onSort)="onSort($event)"
-    (onFilter)="onFilter($event)"
-    (onPage)="onPage($event)"
-    #jliTable>
+<p-table [columns]="TData.VisibleColumns" [value]="TData.Rows" [rowExpandMode]="'single'"
+    [expandedRowKeys]="TData.ExpandedRows" [paginator]="true" [rows]="rowsPerPageDefault"
+    [rowsPerPageOptions]="TData.RowsPerPageOptions" [paginatorPosition]="'top'" [customSort]="true"
+    (sortFunction)="customSort($event)" (onSort)="onSort($event)" (onFilter)="onFilter($event)"
+    (onPage)="onPage($event)" #jliTable>
     <ng-template pTemplate="paginatorright">
         <span>lignes par page</span>
     </ng-template>
@@ -23,8 +18,14 @@
             <th *ngFor="let col of columns" [pSortableColumn]="col.Id">
                 <div class="ui-table-header">
                     <div class="ui-table-header-name">{{col.HeaderName}}</div>
-                    <div *ngIf="col.IsSortable" class="ui-table-header-sorticon"><p-sortIcon [field]="col.Id" ariaLabel="Tri les données" ariaLabelDesc="Tri dans l'ordre décroissant" ariaLabelAsc="Tri dans l'ordre croissant"></p-sortIcon></div>
-                    <div *ngIf="col.IsFilterable" class="ui-table-header-filter" ><input pInputText type="text" (input)="customFilter($event.target.value, col.FieldName)" (click)="$event.stopPropagation()"/></div>
+                    <div *ngIf="col.IsSortable" class="ui-table-header-sorticon">
+                        <p-sortIcon [field]="col.Id" ariaLabel="Tri les données"
+                            ariaLabelDesc="Tri dans l'ordre décroissant" ariaLabelAsc="Tri dans l'ordre croissant">
+                        </p-sortIcon>
+                    </div>
+                    <div *ngIf="col.IsFilterable" class="ui-table-header-filter"><input pInputText type="text"
+                            (input)="customFilter($event.target.value, col.FieldName)"
+                            (click)="$event.stopPropagation()" /></div>
                 </div>
             </th>
         </tr>
@@ -42,10 +43,10 @@
                 </ng-container>
                 <ng-template #elseNotExpandColumnBody>
                     <div *ngIf="col.Inputs == null; else elseInputsColumnBlock">
-                        <ng-container *ngIf="col.Format == null; else elseFormatNullRowContent">
+                        <ng-container *ngIf="col.Format == null; else elseFormatNotNullRowContent">
                             {{ rowData.Data[col.FieldName] }}
                         </ng-container>
-                        <ng-template #elseFormatNullRowContent>
+                        <ng-template #elseFormatNotNullRowContent>
                             {{ col.Format.transform(rowData.Data[col.FieldName]) }}
                         </ng-template>
                     </div>
@@ -60,60 +61,44 @@
         <tr *ngFor="let expRow of rowData.ExpandableContent | keyvalue">
             <td *ngFor="let col of columns" [ngClass]="col.ClassData == null ? '' : col.ClassData">
                 <div *ngIf="col.Inputs == null; else elseInputsColumnBlock2">
-                        <ng-container *ngIf="col.Format == null; else elseFormatNullExpandedContent">
-                            <ng-container *ngIf="col.IsClickableTpl == null">
-                                {{ expRow.value.Data[col.FieldName] }}
-                               
-                            </ng-container>
+                    <ng-container *ngIf="col.Format == null; else elseFormatNotNullExpandedContent">
+                        <ng-container *ngIf="col.RowExpandedInputs == null">
+                            {{ expRow.value.Data[col.FieldName] }}
+                        </ng-container>
+                    </ng-container>
 
-                            
-                            </ng-container>
-                    
-
-                    <ng-template #elseFormatNullExpandedContent>
-                        <ng-container *ngIf="col.IsClickableTpl == null">
+                    <ng-template #elseFormatNotNullExpandedContent>
+                        <ng-container *ngIf="col.RowExpandedInputs == null && expRow.value.Data[col.FieldName]">
                             {{ col.Format.transform(expRow.value.Data[col.FieldName]) }}
                         </ng-container>
-
                     </ng-template>
                 </div>
-            
+
                 <ng-template #elseInputsColumnBlock2>
 
-                    <ng-container *ngIf="col.Format == null; else elseFormatNullExpandedContent">
-                            <ng-container *ngIf="col.IsClickableTpl == null; else elseNotClickable">
-                                {{ expRow.value.Data[col.FieldName] }}
-
-                            </ng-container>
-
-                            <ng-template #elseNotClickable>
-                              <ng-container *ngTemplateOutlet="col.IsClickableTpl; context:expRow.value"></ng-container> 
-
-                              
-                            </ng-template>
-                            
-                    </ng-container>
-                    
-
-                    <ng-template #elseFormatNullExpandedContent>
-                        <ng-container *ngIf="col.IsClickableTpl == null;  else elseNotClickable">
-                            {{ col.Format.transform(expRow.value.Data[col.FieldName]) }}
-
-                           
+                    <ng-container *ngIf="col.Format == null; else elseFormatNotNullExpandedContent">
+                        <ng-container
+                            *ngIf="col.RowExpandedInputs == null; else elseRowExpandedInputsNotNull">
+                            {{ expRow.value.Data[col.FieldName] }}
                         </ng-container>
 
-                        <ng-template #elseNotClickable>
-                            <ng-container *ngTemplateOutlet="col.IsClickableTpl; context:expRow.value"></ng-container> 
+                        <ng-template #elseRowExpandedInputsNotNull>
+                            <ng-container *ngTemplateOutlet="col.RowExpandedInputs; context:expRow.value">
+                            </ng-container>
+                        </ng-template>
+                    </ng-container>
+                    <ng-template #elseFormatNotNullExpandedContent>
+                        <ng-container
+                            *ngIf="col.RowExpandedInputs == null;  else elseRowExpandedInputsNotNull">
+                            {{ col.Format.transform(expRow.value.Data[col.FieldName]) }}
+                        </ng-container>
 
-                            
-                          </ng-template>
-
-                       
-
+                        <ng-template #elseRowExpandedInputsNotNull>
+                            <ng-container *ngTemplateOutlet="col.RowExpandedInputs; context:expRow.value">
+                            </ng-container>
+                        </ng-template>
                     </ng-template>
-
                 </ng-template>
-
             </td>
         </tr>
     </ng-template>
@@ -122,23 +107,23 @@
         <tr>
             <td *ngFor="let col of columns" [ngClass]="col.ClassData == null ? '' : col.ClassData">
                 <ng-container *ngIf="col.IsExpandColumn == true">
-                        <span>&nbsp;</span>
+                    <span>&nbsp;</span>
                 </ng-container>
-                
+
                 <ng-container [ngSwitch]="col.FooterType">
-                        <span *ngSwitchCase="FooterType.None">&nbsp;</span>
-                        <span *ngSwitchCase="FooterType.RepeatHeader">{{ col.HeaderName }}</span>
-                        <span *ngSwitchCase="FooterType.SumAll">
-                            {{ SumAll(col.FieldName) }}
-                        </span>
-                        <span *ngSwitchCase="FooterType.SumPage">
-                                {{ footerValues[col.FieldName] }}
-                        </span>
-                        <span *ngSwitchCase="FooterType.Title">
+                    <span *ngSwitchCase="FooterType.None">&nbsp;</span>
+                    <span *ngSwitchCase="FooterType.RepeatHeader">{{ col.HeaderName }}</span>
+                    <span *ngSwitchCase="FooterType.SumAll">
+                        {{ SumAll(col.FieldName) }}
+                    </span>
+                    <span *ngSwitchCase="FooterType.SumPage">
+                        {{ footerValues[col.FieldName] }}
+                    </span>
+                    <span *ngSwitchCase="FooterType.Title">
                         <ng-container *ngTemplateOutlet="col.FooterTitle; context:col"></ng-container>
-                         </span>
+                    </span>
                 </ng-container>
-                
+
             </td>
         </tr>
     </ng-template>
