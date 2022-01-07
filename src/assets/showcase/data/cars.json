@@ -1,9 +1,9 @@
 {
     "data": [
-        {"id": 10000, "date": "2012/10/01", "brand": "VW", "year": 2012, "color": "Orange", "vin": "dsad231ff"},
-        {"id": 10001, "date": "2012/11/28", "brand": "VW", "year": 2012, "color": "Orange", "vin": "yyxd231ff"},
-        {"id": 10002, "date": "2012/11/27", "brand": "VW", "year": 2012, "color": "Orange", "vin": "aauu1qfg"},
-        {"id": 10100, "date": "2005/01/01", "brand": "Renault", "year": 2005, "color": "Gray", "vin": "h354htr"},
+        {"id": 10000, "date": "2012/10/01", "brand": "VW", "year": -2012, "color": "Orange", "vin": "dsad231ff"},
+        {"id": 10001, "date": "2012/11/28", "brand": "VW", "year": -2012, "color": "Orange", "vin": "yyxd231ff"},
+        {"id": 10002, "date": "2012/11/27", "brand": "VW", "year": -2012, "color": "Orange", "vin": "aauu1qfg"},
+        {"id": 10100, "date": "2005/01/01", "brand": "Renault", "year": -2005, "color": "Gray", "vin": "h354htr"},
         {"id": 10200, "date": "2011/01/01","brand": "Audi", "year": 2011, "color": "Black", "vin": "gwregre345"},
         {"id": 10300, "date": "2003/01/01","brand": "BMW", "year": 2003, "color": "Blue", "vin": "j6w54qgh"},
         {"id": 10400, "date": "1995/01/01","brand": "Mercedes", "year": 1995, "color": "Orange", "vin": "hrtwy34"},

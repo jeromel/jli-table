@@ -78,7 +78,7 @@ export class JliTableComponent implements OnInit, AfterViewInit {
 
     if (undefined != samples && null != samples) {
       samples.forEach(x => {
-        sum += x.Data[fieldName];
+        sum += Math.abs(x.Data[fieldName]);
       });
     }
     
@@ -105,7 +105,7 @@ export class JliTableComponent implements OnInit, AfterViewInit {
 
     if (undefined != samples && null != samples) {
       samples.forEach(x => {
-        sum += x.Data[fieldName];
+        sum += Math.abs(x.Data[fieldName]);
       });
     }
     
