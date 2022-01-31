@@ -3,7 +3,6 @@ import { TRow } from './TRow';
 import { IDictionary } from './IDictionary';
 import { Subject, Observable } from 'rxjs';
 import { THeaderRow } from './THeaderRow';
-import { TDataTool } from '../tools/tdata.tool';
 
 export class TData {
     DataKey: string;
@@ -22,9 +21,16 @@ export class TData {
 
     RowsPerPageOptions: Array<number>;
     
+    RowStyleCondition: string;
+
+    getRowStyleCondition(data: Array<any>, key: string) {
+        // return (data[key] % 100 == 99) ? 'bg-red-italic': null;
+        console.debug(this.RowStyleCondition);
+        return this.RowStyleCondition;
+
+    }
+
     constructor() {
         this.OnChangeSub = new Subject<TData>();
     }
-
-   
 }
