@@ -24,9 +24,10 @@ export class TData {
     RowStyleCondition: string;
 
     getRowStyleCondition(data: Array<any>, key: string) {
-        // return (data[key] % 100 == 99) ? 'bg-red-italic': null;
-        console.debug(this.RowStyleCondition);
-        return this.RowStyleCondition;
+        console.debug(data[key]);
+         return (data[key] % 100 == 99) ? 'bg-red-italic': null;
+        // console.debug(this.RowStyleCondition);
+        // return this.RowStyleCondition;
 
     }
 
