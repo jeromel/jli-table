@@ -3,7 +3,10 @@ import { TRow } from './TRow';
 import { IDictionary } from './IDictionary';
 import { Subject, Observable } from 'rxjs';
 import { THeaderRow } from './THeaderRow';
-import { TDataTool } from '../tools/tdata.tool';
+
+export interface RowStyleCondition {
+    (rowData: TRow): string;
+}
 
 export class TData {
     DataKey: string;
@@ -22,9 +25,9 @@ export class TData {
 
     RowsPerPageOptions: Array<number>;
     
+    RowStyleCondition: RowStyleCondition;
+
     constructor() {
         this.OnChangeSub = new Subject<TData>();
     }
-
-   
 }

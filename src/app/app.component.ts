@@ -11,8 +11,6 @@ import { FooterType } from 'projects/jli-table/src/public_api';
 import {FrenchDecimalPipe} from 'src/pipes/french-decimal.pipe';
 import { THeaderRow } from 'projects/jli-table/src/lib/entities/THeaderRow';
 import { JliTableComponent } from 'projects/jli-table/src/lib/components/table/jli-table.component';
-import { DialogService,DynamicDialogRef } from 'primeng';
-
 
 @Component({
   selector: 'app-root',
@@ -45,7 +43,7 @@ export class AppComponent {
   data: TData;
 
   
-
+ 
 
 
   constructor(private carService: CarService) {
@@ -71,6 +69,8 @@ export class AppComponent {
 
     
     this.data = new TData();
+      
+    //this.data.RowStyleCondition = 'rowData.Data.id  % 100 == 99' ;
     this.data.DataKey = this.columnsConfig[0].FieldName;
     this.data.HeaderConfig = this.headerConfig;
     this.data.Columns = this.columnsConfig;
@@ -79,7 +79,17 @@ export class AppComponent {
       this.data.ExpandedRows[col.FieldName] = 0;
     }
     this.data.RowsPerPageOptions = [5, 10, 100];
+    this.data.RowStyleCondition = ( (rowData: TRow): string => { 
+      let string;
+      if (rowData.Data.id % 100 == 99){
+        string = 'bg-red-italic'
+      }
+      else {
+        string = "";
+      }
 
+      return string;
+    });
     TDataTool.configureColumns(this.data);
     
 
@@ -105,7 +115,7 @@ export class AppComponent {
             let expandableContent: Array<TRow> = x.Rows.filter(y => y.Data[x.DataKey] >= row.Data[x.DataKey] && y.Data[x.DataKey] < row.Data[x.DataKey]+100 ); 
             row.ExpandableContent = expandableContent;
         });
-        x.Rows = x.Rows.filter(y => y.Data[x.DataKey] % 100 == 0);
+        // x.Rows = x.Rows.filter(y => y.Data[x.DataKey] % 100 == 0);
       });     
     });
   }
