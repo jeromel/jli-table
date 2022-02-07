@@ -122,9 +122,6 @@ export class JliTableComponent implements OnInit, AfterViewInit {
   }
 
   public getRowStyle(data: TData, rowData: TRow) : string{
-    
-    console.debug(data);
-    console.debug(rowData);
     return data.RowStyleCondition(rowData);
   }
 
