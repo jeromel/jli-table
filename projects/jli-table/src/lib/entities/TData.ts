@@ -4,6 +4,10 @@ import { IDictionary } from './IDictionary';
 import { Subject, Observable } from 'rxjs';
 import { THeaderRow } from './THeaderRow';
 
+export interface RowStyleCondition {
+    (rowData: TRow): string;
+}
+
 export class TData {
     DataKey: string;
     HeaderConfig: Array<THeaderRow>;
@@ -21,15 +25,7 @@ export class TData {
 
     RowsPerPageOptions: Array<number>;
     
-    RowStyleCondition: string;
-
-    getRowStyleCondition(data: Array<any>, key: string) {
-        console.debug(data[key]);
-         return (data[key] % 100 == 99) ? 'bg-red-italic': null;
-        // console.debug(this.RowStyleCondition);
-        // return this.RowStyleCondition;
-
-    }
+    RowStyleCondition: RowStyleCondition;
 
     constructor() {
         this.OnChangeSub = new Subject<TData>();

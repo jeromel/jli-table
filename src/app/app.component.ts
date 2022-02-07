@@ -79,7 +79,17 @@ export class AppComponent {
       this.data.ExpandedRows[col.FieldName] = 0;
     }
     this.data.RowsPerPageOptions = [5, 10, 100];
+    this.data.RowStyleCondition = ( (rowData: TRow): string => { 
+      let string;
+      if (rowData.Data.id % 100 == 99){
+        string = 'bg-red-italic'
+      }
+      else {
+        string = "";
+      }
 
+      return string;
+    });
     TDataTool.configureColumns(this.data);
     
 

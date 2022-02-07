@@ -32,7 +32,7 @@
     </ng-template>
     <ng-template pTemplate="body" let-rowData let-expanded="expanded" let-columns="columns">
       
-            <tr  [ngClass]="getRowStyle(rowData)">
+            <tr  [ngClass]="getRowStyle(TData, rowData)">
       
             <td *ngFor="let col of columns" [ngClass]="col.ClassData == null ? '' : col.ClassData">
                 <ng-container *ngIf="col.IsExpandColumn == true; else elseNotExpandColumnBody">

@@ -121,15 +121,11 @@ export class JliTableComponent implements OnInit, AfterViewInit {
     return ret;
   }
 
-  public getRowStyle(rowData: TRow) : string{
-    let string;
-    if (rowData.Data.id % 100 == 99){
-      string = 'bg-red-italic'
-    }
-    else {
-      string = "";
-    }
-    return string;
+  public getRowStyle(data: TData, rowData: TRow) : string{
+    
+    console.debug(data);
+    console.debug(rowData);
+    return data.RowStyleCondition(rowData);
   }
 
   public firstRow: number;
