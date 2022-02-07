@@ -43,7 +43,7 @@ export class AppComponent {
   data: TData;
 
   
-
+ 
 
 
   constructor(private carService: CarService) {
@@ -69,7 +69,8 @@ export class AppComponent {
 
     
     this.data = new TData();
-    this.data.RowStyleCondition = ' rowData.Data.id  % 100 == 99 ? \'bg-red-italic\' : null' ;
+      
+    //this.data.RowStyleCondition = 'rowData.Data.id  % 100 == 99' ;
     this.data.DataKey = this.columnsConfig[0].FieldName;
     this.data.HeaderConfig = this.headerConfig;
     this.data.Columns = this.columnsConfig;
