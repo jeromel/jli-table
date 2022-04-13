@@ -1,8 +1,6 @@
-<p-table [columns]="TData.VisibleColumns" [value]="TData.Rows" [rowExpandMode]="'single'"
-    [expandedRowKeys]="TData.ExpandedRows" [paginator]="true" [rows]="rowsPerPageDefault"
-    [rowsPerPageOptions]="TData.RowsPerPageOptions" [paginatorPosition]="'top'" [customSort]="true"
-    (sortFunction)="customSort($event)" (onSort)="onSort($event)" (onFilter)="onFilter($event)"
-    (onPage)="onPage($event)" #jliTable>
+<p-table [columns]="TData.VisibleColumns" [value]="TData.Rows" [expandedRowKeys]="TData.ExpandedRows" [rowExpandMode]="rowExpandMode"
+    [paginator]="true" [rows]="rowsPerPageDefault" [rowsPerPageOptions]="TData.RowsPerPageOptions" [paginatorPosition]="'top'" [customSort]="true"
+    (sortFunction)="customSort($event)" (onSort)="onSort($event)" (onFilter)="onFilter($event)" (onPage)="onPage($event)" #jliTable>
     <ng-template pTemplate="paginatorright">
         <span>lignes par page</span>
     </ng-template>
@@ -19,21 +17,20 @@
                 <div class="ui-table-header">
                     <div class="ui-table-header-name">{{col.HeaderName}}</div>
                     <div *ngIf="col.IsSortable" class="ui-table-header-sorticon">
-                        <p-sortIcon [field]="col.Id" ariaLabel="Tri les données"
-                            ariaLabelDesc="Tri dans l'ordre décroissant" ariaLabelAsc="Tri dans l'ordre croissant">
+                        <p-sortIcon [field]="col.Id" ariaLabel="Tri les données" ariaLabelDesc="Tri dans l'ordre décroissant"
+                            ariaLabelAsc="Tri dans l'ordre croissant">
                         </p-sortIcon>
                     </div>
                     <div *ngIf="col.IsFilterable" class="ui-table-header-filter"><input pInputText type="text"
-                            (input)="customFilter($event.target.value, col.FieldName)"
-                            (click)="$event.stopPropagation()" /></div>
+                            (input)="customFilter($event.target.value, col.FieldName)" (click)="$event.stopPropagation()" /></div>
                 </div>
             </th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-rowData let-expanded="expanded" let-columns="columns">
-      
-            <tr  [ngClass]="getRowStyle(TData, rowData)">
-      
+
+        <tr [ngClass]="getRowStyle(TData, rowData)">
+
             <td *ngFor="let col of columns" [ngClass]="col.ClassData == null ? '' : col.ClassData">
                 <ng-container *ngIf="col.IsExpandColumn == true; else elseNotExpandColumnBody">
                     <div>
@@ -79,8 +76,7 @@
                 <ng-template #elseInputsColumnBlock2>
 
                     <ng-container *ngIf="col.Format == null; else elseFormatNotNullExpandedContent">
-                        <ng-container
-                            *ngIf="col.RowExpandedInputs == null; else elseRowExpandedInputsNotNull">
+                        <ng-container *ngIf="col.RowExpandedInputs == null; else elseRowExpandedInputsNotNull">
                             {{ expRow.value.Data[col.FieldName] }}
                         </ng-container>
 
@@ -90,8 +86,7 @@
                         </ng-template>
                     </ng-container>
                     <ng-template #elseFormatNotNullExpandedContent>
-                        <ng-container
-                            *ngIf="col.RowExpandedInputs == null;  else elseRowExpandedInputsNotNull">
+                        <ng-container *ngIf="col.RowExpandedInputs == null;  else elseRowExpandedInputsNotNull">
                             {{ col.Format.transform(expRow.value.Data[col.FieldName]) }}
                         </ng-container>
 

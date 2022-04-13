@@ -17,21 +17,23 @@ import { SortEvent } from 'primeng';
 export class JliTableComponent implements OnInit, AfterViewInit {
   @Input() TData: TData;
   @Input() rowsPerPageDefault: number;
+  @Input() public rowExpandMode: string;
 
-  @ViewChild('jliTable', { static: true}) _table: Table;
+  @ViewChild('jliTable', { static: true }) _table: Table;
 
   public FooterType = FooterType;
 
   public footerValues: IDictionary<string>;
-  
+
+
   constructor() { }
 
   ngAfterViewInit() {
-    this._table.dataKey = 'Data.'+this.TData.DataKey;
+    this._table.dataKey = 'Data.' + this.TData.DataKey;
   }
 
   ngOnInit() {
-  
+
     this.TData.OnChange().subscribe(x => {
       this.TData.Columns.filter(x => x.FooterType === FooterType.SumPage).forEach(x => {
         this.footerValues[x.FieldName] = this.SumPage(x.FieldName);
@@ -49,16 +51,16 @@ export class JliTableComponent implements OnInit, AfterViewInit {
     this.footerValues = {};
   }
 
-  public resetSort(){
+  public resetSort() {
     this._table.sortOrder = 0;
-    this._table.sortField  ='';
+    this._table.sortField = '';
     this._table.reset();
   }
 
   public customSort(event: SortEvent): void {
-   
+
     let col: TColumn = this.TData.Columns.find(x => x.Id == event.field);
-    
+
     if (null != col) {
       if (col.IsSortable) {
         event.field = col.FieldName;
@@ -73,7 +75,7 @@ export class JliTableComponent implements OnInit, AfterViewInit {
 
   public SumAll(fieldName: string): string {
     let sum: number = 0;
-    
+
     let samples: Array<TRow> = this.TData.Rows;
 
     if (undefined != samples && null != samples) {
@@ -81,7 +83,7 @@ export class JliTableComponent implements OnInit, AfterViewInit {
         sum += x.Data[fieldName];
       });
     }
-    
+
     let ret: string = sum.toString();
 
     let col: TColumn = this.TData.Columns.find(x => x.FieldName == fieldName);
@@ -108,7 +110,7 @@ export class JliTableComponent implements OnInit, AfterViewInit {
         sum += x.Data[fieldName];
       });
     }
-    
+
     let ret: string = sum.toString();
 
     let col: TColumn = this.TData.Columns.find(x => x.FieldName == fieldName);
@@ -121,7 +123,7 @@ export class JliTableComponent implements OnInit, AfterViewInit {
     return ret;
   }
 
-  public getRowStyle(data: TData, rowData: TRow) : string{
+  public getRowStyle(data: TData, rowData: TRow): string {
     return data.RowStyleCondition(rowData);
   }
 
@@ -146,7 +148,7 @@ export class JliTableComponent implements OnInit, AfterViewInit {
   public onFilter(event) {
     let filtered: Array<TRow> = event.filteredValue;
     this.TData.Columns.filter(x => x.FooterType === FooterType.SumPage).forEach(x => {
-        this.footerValues[x.FieldName] = this.SumPage(x.FieldName, filtered);
+      this.footerValues[x.FieldName] = this.SumPage(x.FieldName, filtered);
     });
   }
 }
