@@ -18,13 +18,18 @@ export class JliTableComponent implements OnInit, AfterViewInit {
   @Input() TData: TData;
   @Input() rowsPerPageDefault: number;
   @Input() public rowExpandMode: string;
+  @Input() public showExpandAllLinesButton: boolean = false;
 
   @ViewChild('jliTable', { static: true }) _table: Table;
 
   public FooterType = FooterType;
 
   public footerValues: IDictionary<string>;
-
+  private expandAllRowsLabel: string = "Développer toutes les lignes";
+  private collapseAllRowsLabel: string = "Réduire toutes les lignes";
+  public expandedRows: { [key: string]: boolean } = {};
+  private allLinesAreExpanded: boolean = false;
+  public expandCollapseAllLinesButtonText: string;
 
   constructor() { }
 
@@ -33,11 +38,15 @@ export class JliTableComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-
+    this.expandCollapseAllLinesButtonText = this.expandAllRowsLabel;
     this.TData.OnChange().subscribe(x => {
+      console.log(this.expandedRows);
       this.TData.Columns.filter(x => x.FooterType === FooterType.SumPage).forEach(x => {
         this.footerValues[x.FieldName] = this.SumPage(x.FieldName);
       });
+      if (this.showExpandAllLinesButton) {
+        this.shouldExpandAllLines(false);
+      }
     });
 
     this.firstRow = 0;
@@ -150,5 +159,22 @@ export class JliTableComponent implements OnInit, AfterViewInit {
     this.TData.Columns.filter(x => x.FooterType === FooterType.SumPage).forEach(x => {
       this.footerValues[x.FieldName] = this.SumPage(x.FieldName, filtered);
     });
+  }
+
+  public toogleExpandCollapsAllLines() {
+    if (this.TData.Rows && this.TData.Rows.length > 0)
+      this.shouldExpandAllLines(!this.allLinesAreExpanded);
+  }
+
+  /**
+ * 
+ * @param shouldExpandAll true if you want to expand all lines, false if you want to close all lines
+ */
+  private shouldExpandAllLines(shouldExpandAll: boolean) {
+    this.expandCollapseAllLinesButtonText = shouldExpandAll ? this.collapseAllRowsLabel : this.expandAllRowsLabel;
+    this.TData.Rows.forEach(row => {
+      this.expandedRows[row.Data[this.TData.DataKey]] = shouldExpandAll ? true : null;
+    });
+    this.allLinesAreExpanded = shouldExpandAll;
   }
 }

@@ -1,5 +1,10 @@
-<p-table [columns]="TData.VisibleColumns" [value]="TData.Rows" [expandedRowKeys]="TData.ExpandedRows" [rowExpandMode]="rowExpandMode"
-    [paginator]="true" [rows]="rowsPerPageDefault" [rowsPerPageOptions]="TData.RowsPerPageOptions" [paginatorPosition]="'top'" [customSort]="true"
+<div *ngIf="showExpandAllLinesButton">
+    <button class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" (click)="toogleExpandCollapsAllLines()">
+        <span class="ui-button-text ui-clickable">{{expandCollapseAllLinesButtonText}}</span>
+    </button>
+</div>
+<p-table [columns]="TData.VisibleColumns" [value]="TData.Rows" [rowExpandMode]="rowExpandMode" [paginator]="true" [rows]="rowsPerPageDefault"
+    [rowsPerPageOptions]="TData.RowsPerPageOptions" [paginatorPosition]="'top'" [customSort]="true" [expandedRowKeys]="expandedRows"
     (sortFunction)="customSort($event)" (onSort)="onSort($event)" (onFilter)="onFilter($event)" (onPage)="onPage($event)" #jliTable>
     <ng-template pTemplate="paginatorright">
         <span>lignes par page</span>
