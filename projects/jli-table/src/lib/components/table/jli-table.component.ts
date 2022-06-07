@@ -162,7 +162,7 @@ export class JliTableComponent implements OnInit, AfterViewInit {
   }
 
   public toogleExpandCollapsAllLines() {
-    if (this.TData.Rows)
+    if (this.TData.Rows && this.TData.Rows.length > 0)
       this.shouldExpandAllLines(!this.allLinesAreExpanded);
   }
 
