@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, AfterViewInit, Output } from '@angular/core';
 import { TData } from '../../entities/TData';
 
 import { Table } from 'primeng/table';
@@ -7,6 +7,7 @@ import { FooterType } from '../../entities/FooterType';
 import { TRow } from '../../entities/TRow';
 import { IDictionary } from '../../entities/IDictionary';
 import { SortEvent } from 'primeng';
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'lib-jli-table',
@@ -19,6 +20,9 @@ export class JliTableComponent implements OnInit, AfterViewInit {
   @Input() rowsPerPageDefault: number;
   @Input() public rowExpandMode: string;
   @Input() public showExpandAllLinesButton: boolean = false;
+  @Output() public onPageChange: EventEmitter<{ firstRow: number, lastRow: number }> = new EventEmitter();
+  @Output() public onSortRows: EventEmitter<{ firstRow: number, lastRow: number }> = new EventEmitter();
+
 
   @ViewChild('jliTable', { static: true }) _table: Table;
 
@@ -146,12 +150,14 @@ export class JliTableComponent implements OnInit, AfterViewInit {
     this.TData.Columns.filter(x => x.FooterType === FooterType.SumPage).forEach(x => {
       this.footerValues[x.FieldName] = this.SumPage(x.FieldName);
     });
+    this.onPageChange.emit({ firstRow: this.firstRow, lastRow: this.lastRow });
   }
 
   public onSort(event) {
     this.TData.Columns.filter(x => x.FooterType === FooterType.SumPage).forEach(x => {
       this.footerValues[x.FieldName] = this.SumPage(x.FieldName);
     });
+    this.onSortRows.emit({ firstRow: this.firstRow, lastRow: this.lastRow });
   }
 
   public onFilter(event) {
