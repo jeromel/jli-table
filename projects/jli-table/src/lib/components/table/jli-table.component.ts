@@ -44,7 +44,6 @@ export class JliTableComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.expandCollapseAllLinesButtonText = this.expandAllRowsLabel;
     this.TData.OnChange().subscribe(x => {
-      console.log(this.expandedRows);
       this.TData.Columns.filter(x => x.FooterType === FooterType.SumPage).forEach(x => {
         this.footerValues[x.FieldName] = this.SumPage(x.FieldName);
       });
