@@ -44,7 +44,6 @@ export class JliTableComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.expandCollapseAllLinesButtonText = this.expandAllRowsLabel;
     this.TData.OnChange().subscribe(x => {
-      console.log(this.expandedRows);
       this.TData.Columns.filter(x => x.FooterType === FooterType.SumPage).forEach(x => {
         this.footerValues[x.FieldName] = this.SumPage(x.FieldName);
       });
@@ -93,7 +92,7 @@ export class JliTableComponent implements OnInit, AfterViewInit {
 
     if (undefined != samples && null != samples) {
       samples.forEach(x => {
-        sum += x.Data[fieldName];
+        sum += Math.abs(x.Data[fieldName]);
       });
     }
 
@@ -120,7 +119,7 @@ export class JliTableComponent implements OnInit, AfterViewInit {
 
     if (undefined != samples && null != samples) {
       samples.forEach(x => {
-        sum += x.Data[fieldName];
+        sum += Math.abs(x.Data[fieldName]);
       });
     }
 

@@ -8,7 +8,7 @@ import { CarService } from 'src/services/car.service';
 
 import {faEdit, faLock, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import { FooterType } from 'projects/jli-table/src/public_api';
-import { FrenchDecimalPipe } from 'src/pipes/french-decimal.pipe';
+import {FrenchDecimalPipe} from 'src/pipes/french-decimal.pipe';
 import { THeaderRow } from 'projects/jli-table/src/lib/entities/THeaderRow';
 import { JliTableComponent } from 'projects/jli-table/src/lib/components/table/jli-table.component';
 
