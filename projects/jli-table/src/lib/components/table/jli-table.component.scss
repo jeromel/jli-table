@@ -1,13 +1,13 @@
 .td-right {
-    text-align: right;
+    text-align: right !important;
 }
 
 .td-center {
-    text-align: center;
+    text-align: center !important;
 }
 
 .td-left {
-    text-align: left;
+    text-align: left !important;
 }
 
 .bg-red-italic {
@@ -20,11 +20,11 @@
 }
 
 .bg-yellow {
-    background-color: #f9e3cb;
+    background-color: #f9e3cb !important;
 }
 
 .bg-blue {
-    background-color: #bec9fb;
+    background-color: #bec9fb !important;
 }
 
 .font-italic {
@@ -32,5 +32,5 @@
 }
 
 .font-bold {
-    font-weight: 650;
+    font-weight: 650 !important;
 }
