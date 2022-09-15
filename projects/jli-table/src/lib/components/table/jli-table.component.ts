@@ -53,7 +53,7 @@ export class JliTableComponent implements OnInit, AfterViewInit {
     });
 
     this.firstRow = 0;
-    if (undefined != this.TData.Rows) {
+    if (!this.TData.Rows) {
       this.lastRow = Math.min(this.TData.Rows.length, this.rowsPerPageDefault);
     }
     else {
@@ -111,8 +111,8 @@ export class JliTableComponent implements OnInit, AfterViewInit {
   public SumPage(fieldName: string, samples: Array<TRow> = undefined): string {
     let sum: number = 0;
 
-    if (undefined == samples) {
-      if (undefined != this.TData.Rows) {
+    if (!samples) {
+      if (this.TData.Rows) {
         samples = this.TData.Rows.slice(this.firstRow, this.lastRow);
       }
     }
@@ -122,7 +122,6 @@ export class JliTableComponent implements OnInit, AfterViewInit {
         sum += Math.abs(x.Data[fieldName]);
       });
     }
-
     let ret: string = sum.toString();
 
     let col: TColumn = this.TData.Columns.find(x => x.FieldName == fieldName);
@@ -169,6 +168,12 @@ export class JliTableComponent implements OnInit, AfterViewInit {
   public toogleExpandCollapsAllLines() {
     if (this.TData.Rows && this.TData.Rows.length > 0)
       this.shouldExpandAllLines(!this.allLinesAreExpanded);
+  }
+
+  public computeSumPage(): void {
+    this.TData?.Columns?.filter(x => x.FooterType === FooterType.SumPage).forEach(x => {
+      this.footerValues[x.FieldName] = this.SumPage(x.FieldName);
+    });
   }
 
   /**
